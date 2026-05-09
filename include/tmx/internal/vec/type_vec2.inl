@@ -37,12 +37,12 @@ namespace tmx
 
 
     template<typename T>
-    TMX_INLINE constexpr T& vec<2, T>::operator[](size_t i)
+    TMX_INLINE constexpr T& vec<2, T>::operator[](int i)
     {
         return values[i];
     }
     template<typename T>
-    TMX_INLINE constexpr const T& vec<2, T>::operator[](size_t i) const
+    TMX_INLINE constexpr const T& vec<2, T>::operator[](int i) const
     {
         return values[i];
     }

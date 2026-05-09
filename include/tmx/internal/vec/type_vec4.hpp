@@ -23,8 +23,8 @@ namespace tmx
         TMX_INLINE constexpr vec(const vec<3, T>& v) noexcept;
         TMX_INLINE constexpr vec(const vec<4, T>& v) noexcept;
 
-        TMX_INLINE constexpr T& operator[](size_t index);
-        TMX_INLINE constexpr const T& operator[](size_t index) const;
+        TMX_INLINE constexpr T& operator[](int index);
+        TMX_INLINE constexpr const T& operator[](int index) const;
 
         TMX_INLINE constexpr operator vec<2, T>() const noexcept { return vec<2, T>(*this); };
         TMX_INLINE constexpr operator vec<3, T>() const noexcept { return vec<3, T>(*this); };

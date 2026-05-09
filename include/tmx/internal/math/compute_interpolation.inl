@@ -10,6 +10,11 @@ namespace tmx
             return (static_cast<T>(1) - t) * start + end * t;
         }
         template<typename T>
+        TMX_INLINE constexpr T FastLerp(T start, T end, T t) noexcept
+        {
+            return start + (end - start) * t;
+        }
+        template<typename T>
         TMX_INLINE constexpr T InvLerp(T start, T end, T val) noexcept
         {
             return (val - start) / (end - start);
@@ -80,7 +85,7 @@ namespace tmx
         }
 
         template<typename T>
-        TMX_INLINE constexpr T MoveToward(T current, T target, T maxDelta) noexcept
+        TMX_INLINE constexpr T MoveTowards(T current, T target, T maxDelta) noexcept
         {
             if (std::abs(target - current) <= maxDelta)
                 return target;

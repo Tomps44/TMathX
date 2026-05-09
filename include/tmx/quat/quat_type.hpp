@@ -4,6 +4,8 @@
 
 namespace tmx
 {
-    typedef quat<float> Quat;
-    typedef quat<double> QuatHighP;
+    // A Quaternion of `floats`
+    using Quat = quat<float>;
+    // A Quaternion of `doubles`
+    using QuatHighP = quat<double>;
 }

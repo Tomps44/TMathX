@@ -28,12 +28,12 @@ namespace tmx
     // --- Accessors ---
 
     template<typename T>
-    TMX_INLINE constexpr T& quat<T>::operator[](size_t i) 
+    TMX_INLINE constexpr T& quat<T>::operator[](int i) 
     {
         return values[i];
     }
     template<typename T>
-    TMX_INLINE constexpr const T quat<T>::operator[](size_t i) const
+    TMX_INLINE constexpr const T quat<T>::operator[](int i) const
     {
         return values[i];
     }
@@ -122,9 +122,6 @@ namespace tmx
     {
         return internal::quatMul<T, internal::useSimd<4, T>::value>::call(q, scalar);
     }
-    /// @param rot UNIT QUAT !!!
-    /// @param point 
-    /// @return 
     template<typename T>
     TMX_INLINE constexpr vec<3, T> operator*(const quat<T>& rot, const vec<3, T>& point) noexcept
     {

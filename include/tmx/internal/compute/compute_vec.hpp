@@ -7,37 +7,37 @@ namespace tmx
 {
     namespace internal
     {
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecAdd {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecSub {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecMul {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecDiv {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecMod {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecNeg {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecAnd {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecOr {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecXor {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecNot {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecShiftLeft {};
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecShiftRight {};
 
-        template<size_t S, typename T, bool isFloating>
+        template<int S, typename T, bool isFloating>
         struct vecEqual {};
     
 
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecAdd<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
@@ -50,7 +50,7 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecSub<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
@@ -63,7 +63,7 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecMul<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
@@ -76,7 +76,7 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecDiv<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
@@ -90,7 +90,7 @@ namespace tmx
         };
 
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecMod<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
@@ -103,7 +103,7 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecNeg<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& v)
@@ -118,13 +118,13 @@ namespace tmx
 
 
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecAnd<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
                 vec<S, T> v = a;
-                for (size_t s = 0; s < S; s++)
+                for (int s = 0; s < S; s++)
                 {
                     v[s] &= b[s];
                 }
@@ -132,13 +132,13 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecOr<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
                 vec<S, T> v = a;
-                for (size_t s = 0; s < S; s++)
+                for (int s = 0; s < S; s++)
                 {
                     v[s] |= b[s];
                 }
@@ -146,13 +146,13 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecXor<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
                 vec<S, T> v = a;
-                for (size_t s = 0; s < S; s++)
+                for (int s = 0; s < S; s++)
                 {
                     v[s] ^= b[s];
                 }
@@ -160,13 +160,13 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecNot<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a)
             {
                 vec<S, T> v = a;
-                for (size_t s = 0; s < S; s++)
+                for (int s = 0; s < S; s++)
                 {
                     v[s] = ~v[s];
                 }
@@ -174,13 +174,13 @@ namespace tmx
             }
         };
 
-        template<size_t S>
+        template<int S>
         struct vecNot<S, bool, false>
         {
             TMX_INLINE static constexpr vec<S, bool> call(const vec<S, bool>& a)
             {
                 vec<S, bool> v = a;
-                for (size_t s = 0; s < S; s++)
+                for (int s = 0; s < S; s++)
                 {
                     v[s] = !v[s];
                 }
@@ -188,13 +188,13 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecShiftLeft<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
                 vec<S, T> v = a;
-                for (size_t s = 0; s < S; s++)
+                for (int s = 0; s < S; s++)
                 {
                     v[s] <<= b[s];
                 }
@@ -202,13 +202,13 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct vecShiftRight<S, T, false>
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
                 vec<S, T> v = a;
-                for (size_t s = 0; s < S; s++)
+                for (int s = 0; s < S; s++)
                 {
                     v[s] >>= b[s];
                 }

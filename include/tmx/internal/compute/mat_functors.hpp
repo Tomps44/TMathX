@@ -5,10 +5,10 @@ namespace tmx
 {
     namespace internal
     {
-        template<size_t R, size_t C, typename T>
+        template<int R, int C, typename T>
         struct computeMat_oneElem {} ;
 
-        template<size_t R, size_t C, typename T>
+        template<int R, int C, typename T>
         struct computeMat_twoElem {};
 
 

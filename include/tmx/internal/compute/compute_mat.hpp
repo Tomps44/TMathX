@@ -5,23 +5,23 @@ namespace tmx
 {
     namespace internal
     {
-        template<size_t R, size_t C, typename T, bool useSimd>
+        template<int R, int C, typename T, bool useSimd>
         struct matAdd {};
-        template<size_t R, size_t C, typename T, bool useSimd>
+        template<int R, int C, typename T, bool useSimd>
         struct matSub {};
-        template<size_t R, size_t C, typename T, bool useSimd>
+        template<int R, int C, typename T, bool useSimd>
         struct matMul {};
-        template<size_t R, size_t C, typename T, bool useSimd>
+        template<int R, int C, typename T, bool useSimd>
         struct matDiv {};
-        template<size_t R, size_t C, typename T, bool useSimd>
+        template<int R, int C, typename T, bool useSimd>
         struct matNeg {};
 
-        template<size_t R, size_t C, typename T>
+        template<int R, int C, typename T>
         struct matEqual {};
 
 
 
-        template<size_t R, size_t C, typename T>
+        template<int R, int C, typename T>
         struct matAdd<R, C, T, false>
         {
             TMX_INLINE static constexpr mat<R, C, T> call(const mat<R, C, T>& a, const mat<R, C, T>& b)
@@ -59,7 +59,7 @@ namespace tmx
             }
         };
 
-        template<size_t R, size_t C, typename T>
+        template<int R, int C, typename T>
         struct matSub<R, C, T, false>
         {
             TMX_INLINE static constexpr mat<R, C, T> call(const mat<R, C, T>& a, const mat<R, C, T>& b)
@@ -280,7 +280,7 @@ namespace tmx
         };
         
 
-        template<size_t R, size_t C, typename T>
+        template<int R, int C, typename T>
         struct matDiv<R, C, T, false>
         {
             TMX_INLINE static constexpr mat<2, 2, T> call(const mat<2, 2, T>& m, T scalar)
@@ -312,7 +312,7 @@ namespace tmx
 
 
 
-        template<size_t R, size_t C, typename T>
+        template<int R, int C, typename T>
         struct matNeg<R, C, T, false>
         {
             TMX_INLINE static constexpr mat<R, C, T> call(const mat<R, C, T>& m)

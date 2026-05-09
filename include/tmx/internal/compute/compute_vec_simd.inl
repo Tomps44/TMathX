@@ -10,7 +10,7 @@ namespace tmx
 
 
 
-        template<size_t S>
+        template<int S>
         struct vecAdd<S, float, true>
         {
             TMX_INLINE static constexpr vec<S, float> call(const vec<S, float>& a, const vec<S, float>& b)

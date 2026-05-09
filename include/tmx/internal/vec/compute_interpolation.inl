@@ -5,7 +5,7 @@ namespace tmx
 {
     namespace internal
     {
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecLerpUnclamped
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& start, const vec<S, T>& end, T t) noexcept
@@ -14,7 +14,7 @@ namespace tmx
             }
         };
 
-        template<size_t S, typename T, bool useSimd>
+        template<int S, typename T, bool useSimd>
         struct vecSlerpUnclamped
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& start, const vec<S, T>& end, T t) noexcept
@@ -41,7 +41,7 @@ namespace tmx
 
     namespace Vec
     {    
-        template<size_t S, typename T>
+        template<int S, typename T>
         TMX_INLINE constexpr vec<S, T> Lerp(const vec<S, T>& start, const vec<S, T>& end, T t) noexcept
         {
             // clamps t between 0 and 1
@@ -49,13 +49,13 @@ namespace tmx
 
             return internal::vecLerpUnclamped<S, T, internal::useSimd<S, T>::value>::call(start, end, t);
         }
-        template<size_t S, typename T>
+        template<int S, typename T>
         TMX_INLINE constexpr vec<S, T> LerpUnclamped(const vec<S, T>& start, const vec<S, T>& end, T t) noexcept
         {
             return internal::vecLerpUnclamped<S, T, internal::useSimd<S, T>::value>::call(start, end, t);
         }
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         TMX_INLINE constexpr vec<S, T> Slerp(const vec<S, T>& start, const vec<S, T>& end, T t) noexcept
         {
             // clamps t between 0 and 1
@@ -63,14 +63,14 @@ namespace tmx
 
             return internal::vecSlerpUnclamped<S, T, internal::useSimd<S, T>::value>::call(start, end, t);
         }
-        template<size_t S, typename T>
+        template<int S, typename T>
         TMX_INLINE constexpr vec<S, T> SlerpUnclamped(const vec<S, T>& start, const vec<S, T>& end, T t) noexcept
         {
             return internal::vecSlerpUnclamped<S, T, internal::useSimd<S, T>::value>::call(start, end, t);
         }
 
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         TMX_INLINE constexpr vec<S, T> SmoothDamp(const vec<S, T>& current, const vec<S, T>& target, vec<S, T>& currentVelocity,
                                                   T smoothTime, T deltaTime, T maxSpeed) noexcept
         {
@@ -106,7 +106,7 @@ namespace tmx
         }
 
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         TMX_INLINE constexpr vec<S, T> MoveTowards(const vec<S, T>& current, const vec<S, T>& target, T maxDistanceDelta) noexcept
         {
             // Code taken from the Unity Engine (MODIFIED) :

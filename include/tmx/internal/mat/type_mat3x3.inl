@@ -34,12 +34,12 @@ namespace tmx
 
 
     template<typename T>
-    TMX_INLINE constexpr typename mat<3, 3, T>::colType& mat<3, 3, T>::operator[](size_t i) 
+    TMX_INLINE constexpr typename mat<3, 3, T>::colType& mat<3, 3, T>::operator[](int i) 
     {
         return columns[i];
     }
     template<typename T>
-    TMX_INLINE constexpr const typename mat<3, 3, T>::colType& mat<3, 3, T>::operator[](size_t i) const
+    TMX_INLINE constexpr const typename mat<3, 3, T>::colType& mat<3, 3, T>::operator[](int i) const
     {
         return columns[i];
     }

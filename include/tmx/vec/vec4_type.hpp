@@ -4,8 +4,14 @@
 
 namespace tmx
 {
-    typedef vec<4, float> Vec4;
-    typedef vec<4, double> Vec4HighP;
-    typedef vec<4, int> Vec4Int;
-    typedef vec<4, bool> Vec4Bool;
+    // A 4D Vector of `floats`
+    using Vec4 = vec<4, float>;
+    // A 4D Vector of `doubles`
+    using Vec4HighP = vec<4, double>;
+    // A 4D Vector of `int32_t`
+    using Vec4Int = vec<4, int32_t>; 
+    // A 4D Vector of `int64_t`
+    using Vec4Long = vec<4, int64_t>;
+    // A 4D Vector of `bool`
+    using Vec4Bool = vec<4, bool>;
 }

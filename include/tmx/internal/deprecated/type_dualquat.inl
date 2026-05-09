@@ -49,12 +49,12 @@ namespace tmx
     // --- Accessors ---
 
     template<typename T>
-    TMX_INLINE constexpr quat<T>& dQuat<T>::operator[](size_t i)
+    TMX_INLINE constexpr quat<T>& dQuat<T>::operator[](int i)
     {
         return (&real)[i];
     }
     template<typename T>
-    TMX_INLINE constexpr const quat<T>& dQuat<T>::operator[](size_t i) const
+    TMX_INLINE constexpr const quat<T>& dQuat<T>::operator[](int i) const
     {
         return (&real)[i];
     }

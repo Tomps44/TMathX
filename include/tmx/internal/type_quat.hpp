@@ -23,8 +23,8 @@ namespace tmx
         TMX_INLINE constexpr quat() noexcept;
 
 
-        TMX_INLINE constexpr T& operator[](size_t i);
-        TMX_INLINE constexpr const T operator[](size_t i) const;
+        TMX_INLINE constexpr T& operator[](int i);
+        TMX_INLINE constexpr const T operator[](int i) const;
 
         TMX_INLINE constexpr const vec<3, T>& xyz() const { return vec<3, T>(x, y, z); };
 

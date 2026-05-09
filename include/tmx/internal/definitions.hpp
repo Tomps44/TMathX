@@ -4,48 +4,45 @@
 
 namespace tmx
 {
-    template<size_t S, typename T> struct vec;
-    template<size_t R, size_t C, typename T> struct mat;
+    template<int S, typename T> struct vec;
+    template<int R, int C, typename T> struct mat;
     template<typename T> struct quat;
     template<typename T> struct dQuat;
 
 
 
-    // Default type for Math:: functions, can be changed
-    typedef float Real;
-
 
 
     namespace internal
     {
-        template<typename T>
-        struct isInt 
-        {
-            static const bool value = false;
-        };
+        // template<typename T>
+        // struct isInt 
+        // {
+        //     static const bool value = false;
+        // };
 
 
-        template<>
-        struct isInt<int> 
-        {
-            static const bool value = true;
-        };
+        // template<>
+        // struct isInt<int> 
+        // {
+        //     static const bool value = true;
+        // };
 
-        template<>
-        struct isInt<unsigned int> 
-        {
-            static const bool value = true;
-        };
-
-
+        // template<>
+        // struct isInt<unsigned int> 
+        // {
+        //     static const bool value = true;
+        // };
 
 
-        template<size_t S, typename T>
+
+
+        template<int S, typename T>
         struct useSimd 
         {
             static const bool value = false;
         };
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct simdReg
         {
             typedef struct type
@@ -88,13 +85,12 @@ namespace tmx
 
 #if     defined(TMX_SIMD_SSE2)
         template<>
-        struct useSimd<4, int>
+        struct useSimd<4, int32_t>
         {
-            static
-             const bool value = true;
+            static const bool value = true;
         };
         template<>
-        struct simdReg<4, int>
+        struct simdReg<4, int32_t>
         {
             typedef __m128i type;
         };

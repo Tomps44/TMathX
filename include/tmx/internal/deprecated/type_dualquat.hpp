@@ -34,8 +34,8 @@ namespace tmx
         TMX_INLINE constexpr dQuat(const vec<3, T>& trsl) noexcept;
 
 
-        TMX_INLINE constexpr quat<T>& operator[](size_t i);
-        TMX_INLINE constexpr const quat<T>& operator[](size_t i) const;
+        TMX_INLINE constexpr quat<T>& operator[](int i);
+        TMX_INLINE constexpr const quat<T>& operator[](int i) const;
 
         TMX_INLINE constexpr dQuat<T>& operator=(const dQuat<T>& dq) = default;
 

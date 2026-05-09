@@ -5,10 +5,10 @@ namespace tmx
 {
     namespace internal
     {
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct computeVec_oneElem {};
 
-        template<size_t S, typename T>
+        template<int S, typename T>
         struct computeVec_twoElem {};
 
 
