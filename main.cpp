@@ -67,20 +67,27 @@ int main()
 
     using namespace tmx;
     using namespace Math;
-
-
     
-    Vec3 fVec(1.0f, 2.0f, 3.0f);
-    Vec3HighP dVec(4.0, 5.0, 6.0);
+    logMat(Mat::Orthographic_LH_Z0_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
+    std::cout << '\n';
+    logMat(Mat::Orthographic_LH_ZN1_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
+    std::cout << '\n';
+    logMat(Mat::Orthographic_LH_Z0_YDOWN(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
+    std::cout << '\n';
+    logMat(Mat::Orthographic_LH_ZN1_YDOWN(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
+    std::cout << '\n';
+    logMat(Mat::Orthographic_RH_Z0_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
+    std::cout << '\n';
+    logMat(Mat::Orthographic_RH_ZN1_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
+    std::cout << '\n';
+    logMat(Mat::Orthographic_RH_Z0_YDOWN(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
+    std::cout << '\n';
+    logMat(Mat::Orthographic_RH_ZN1_YDOWN(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
+    std::cout << '\n';
+    std::cout << (Mat::Orthographic_LH_Z0_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f) == Mat::Orthographic_LH_Z0_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
 
-    Vec3Int i32Vec = Vec::ToVecInt(fVec);
-    Vec3Long i64Vec = Vec::ToVecInt(dVec);
 
-    logVec(i32Vec);
-    logVec(i64Vec);
-
-
-    
+    // Are the formulas correct ? I have no idea...
   
     return 0;
 }
