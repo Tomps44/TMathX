@@ -1,7 +1,14 @@
 #include <iostream>
 #include <iomanip>
+#include <stdio.h>
 
 #define TMX_FORCE_SIMD_NONE
+#define TMX_SET_COORDINATE_SYSTEM_RH
+#define TMX_SET_ROTATION_ORDER_ZXY
+#define TMX_SET_ROTATION_TYPE_EXTRINSIC
+#define TMX_SET_Z_RANGE_N1_1
+#define TMX_SET_Y_AXIS_UPWARDS
+
 
 #include "tmx/vec/vec_type.hpp"
 #include "tmx/vec/functions.hpp"
@@ -35,10 +42,11 @@ void logMat(const tmx::mat<R, C, T>& mat)
     for (int r = 0; r < R; r++)
     {
         std::cout << "(";
-        for (int c = 0; c < C; c++)
+        for (int c = 0; c < C - 1; c++)
         {
             std::cout << mat[c][r] << " ";
         }
+        std::cout << mat[C - 1][r];
         std::cout << ")" << '\n';
     }
 }
@@ -68,26 +76,13 @@ int main()
     using namespace tmx;
     using namespace Math;
     
-    logMat(Mat::Orthographic_LH_Z0_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
-    std::cout << '\n';
-    logMat(Mat::Orthographic_LH_ZN1_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
-    std::cout << '\n';
-    logMat(Mat::Orthographic_LH_Z0_YDOWN(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
-    std::cout << '\n';
-    logMat(Mat::Orthographic_LH_ZN1_YDOWN(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
-    std::cout << '\n';
-    logMat(Mat::Orthographic_RH_Z0_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
-    std::cout << '\n';
-    logMat(Mat::Orthographic_RH_ZN1_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
-    std::cout << '\n';
-    logMat(Mat::Orthographic_RH_Z0_YDOWN(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
-    std::cout << '\n';
-    logMat(Mat::Orthographic_RH_ZN1_YDOWN(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
-    std::cout << '\n';
-    std::cout << (Mat::Orthographic_LH_Z0_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f) == Mat::Orthographic_LH_Z0_YUP(0.0f, 640.0f, 0.0f, 360.0f, 0.1f, 50.0f));
 
 
-    // Are the formulas correct ? I have no idea...
+    
+
+    // Add functions and variables in tmxDetail from the files clip_space (mat), constants (math), view (mat), rotate (mat)
+   
+
   
     return 0;
 }

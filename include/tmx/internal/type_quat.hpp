@@ -23,6 +23,9 @@ namespace tmx
         TMX_INLINE constexpr quat() noexcept;
 
 
+        TMX_INLINE constexpr const T* data() const noexcept { return &w; };
+
+
         TMX_INLINE constexpr T& operator[](int i);
         TMX_INLINE constexpr const T operator[](int i) const;
 

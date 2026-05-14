@@ -100,7 +100,7 @@ namespace tmx
         {
             // We rotate (pivot - point) by rot, then add again pivot 
 
-            return pivot + (rot * (pivot - point));
+            return pivot + (Qua::Conjugate(rot) * (pivot - point));
         }
 
     } // namespace Qua

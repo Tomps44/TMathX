@@ -1,6 +1,7 @@
 #pragma once
 
 #include "tmx/internal/setup.hpp"
+#include <cstdint>
 
 namespace tmx
 {
@@ -10,33 +11,10 @@ namespace tmx
     template<typename T> struct dQuat;
 
 
-
-
-
+    
     namespace internal
     {
-        // template<typename T>
-        // struct isInt 
-        // {
-        //     static const bool value = false;
-        // };
-
-
-        // template<>
-        // struct isInt<int> 
-        // {
-        //     static const bool value = true;
-        // };
-
-        // template<>
-        // struct isInt<unsigned int> 
-        // {
-        //     static const bool value = true;
-        // };
-
-
-
-
+        
         template<int S, typename T>
         struct useSimd 
         {

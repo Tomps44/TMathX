@@ -42,7 +42,7 @@ namespace tmx
         template<typename T>
         TMX_INLINE constexpr vec<3, T> RotatePoint(const quat<T>& rot, const vec<3, T>& point) noexcept;
         /**
-         * Rotates `point` clockwise around `pivot`, by the rotation `rot`
+         * Rotates `point` counter-clockwise around `pivot`, by the rotation `rot`
          * 
          * @param rot The unit Quaternion representing the rotation
          * @param point The point to rotate around `pivot`

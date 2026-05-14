@@ -6,7 +6,7 @@
 namespace tmx
 {
     template<typename T>
-    struct mat<2, 2, T>
+    struct TMX_ALIGN_(T) mat<2, 2, T>
     {
         typedef vec<2, T> colType;
         typedef vec<2, T> rowType;
@@ -23,10 +23,18 @@ namespace tmx
 
         TMX_INLINE constexpr mat(T x0, T y0, 
                                  T x1, T y1) noexcept;
-        // TMX_INLINE constexpr mat() noexcept;
         TMX_INLINE constexpr mat(T scalar = static_cast<T>(1.0)) noexcept;
         TMX_INLINE constexpr mat(const colType& v1, const colType& v2) noexcept;
         TMX_INLINE constexpr mat(const mat<2, 2, T>& m) noexcept;
+        TMX_INLINE constexpr mat(const mat<3, 3, T>& m) noexcept;
+        TMX_INLINE constexpr mat(const mat<4, 4, T>& m) noexcept;
+
+
+        TMX_INLINE constexpr const T* data() const noexcept { return &(columns[0].x); };
+
+
+        TMX_INLINE constexpr operator mat<3, 3, T>() const noexcept { return mat<3, 3, T>(*this); };
+        TMX_INLINE constexpr operator mat<4, 4, T>() const noexcept { return mat<4, 4, T>(*this); };
 
 
         TMX_INLINE constexpr colType& operator[](int i);

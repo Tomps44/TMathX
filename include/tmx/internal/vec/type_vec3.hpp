@@ -5,7 +5,7 @@
 namespace tmx
 {
     template<typename T>
-    struct vec<3, T>
+    struct TMX_ALIGN_(T) vec<3, T>
     {
         union 
         {
@@ -21,6 +21,9 @@ namespace tmx
         TMX_INLINE constexpr vec(const vec<2, T>& v) noexcept;
         TMX_INLINE constexpr vec(const vec<3, T>& v) noexcept;
         TMX_INLINE constexpr vec(const vec<4, T>& v) noexcept;
+
+
+        TMX_INLINE constexpr const T* data() const noexcept { return &x; };
 
 
         TMX_INLINE constexpr T& operator[](int index);

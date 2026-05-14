@@ -1,9 +1,5 @@
 #pragma once
 
-#include <cstdint>
-
-
-
 
 #if defined(_MSC_VER)
 #   define TMX_COMPILER_MSVC
@@ -16,38 +12,13 @@
 
 #endif
 
-// #if defined(__amd64__) || defined(__amd64) || defined(__x86_64__) || defined(__x86_64)
-// #   define TMX_PLATFORM_AMD64
 
-// #elif defined(__arm__) || defined(_M_ARM)
-// #   define TMX_PLATFORM_ARM
-
-// #elif defined(__aarch64__) || defined(_M_ARM64)
-// #   define TMX_PLATFORM_ARM64
-
-// #endif
-
-#if defined(__ANDROID__)
-#   define TMX_PLATFORM_ANDROID
-
-#elif defined(__linux__)
-#   define TMX_PLATFORM_LINUX
-
-#elif defined(__WIN32) || defined(__WIN64) || defined(__WIN16)
-#   define TMX_PLATFORM_WINDOWS
-
-#elif defined(__unix__) || defined(__unix)
-#   define TMX_PLATFORM_UNIX
-
-#elif defined(__APPLE__)
-#   define TMX_PLATFORM_APPLE
-
-#endif
 
 
 
 #if !defined(TMX_FORCE_SIMD_NONE)
-#   if defined(TMX_FORCE_SIMD_AVX) || defined(__AVX2__) || defined(__AVX__)
+#   if defined(TMX_FORCE_AVX2)
+#       define TMX_SIMD_AVX2
 #       define TMX_SIMD_AVX
 #       define TMX_SIMD_SSE4
 #       define TMX_SIMD_SSSE3
@@ -55,34 +26,87 @@
 #       define TMX_SIMD_SSE2
 #       define TMX_SIMD_SSE
 
-#   elif defined(TMX_FORCE_SIMD_SSE4) || defined(__SSE4_2__) || defined(__SSE4_1__)
+#   elif defined(TMX_FORCE_AVX)
+#       define TMX_SIMD_AVX
 #       define TMX_SIMD_SSE4
 #       define TMX_SIMD_SSSE3
 #       define TMX_SIMD_SSE3
 #       define TMX_SIMD_SSE2
 #       define TMX_SIMD_SSE
 
-#   elif defined(TMX_FORCE_SIMD_SSSE3) || defined(__SSSE3__) 
+#   elif defined(TMX_FORCE_SSE4)
+#       define TMX_SIMD_SSE4
 #       define TMX_SIMD_SSSE3
 #       define TMX_SIMD_SSE3
 #       define TMX_SIMD_SSE2
 #       define TMX_SIMD_SSE
 
-#   elif defined(TMX_FORCE_SIMD_SSE3) || defined(__SSE3__) 
+#   elif defined(TMX_FORCE_SSSE3)
+#       define TMX_SIMD_SSSE3
 #       define TMX_SIMD_SSE3
 #       define TMX_SIMD_SSE2
 #       define TMX_SIMD_SSE
 
+#   elif defined(TMX_FORCE_SSE3)
+#       define TMX_SIMD_SSE3
+#       define TMX_SIMD_SSE2
+#       define TMX_SIMD_SSE
 
-#   elif defined(TMX_FORCE_SIMD_SSE2) || defined(__SSE2__)
-#       define TMX_SIMD_SSE2 
-#       define TMX_SIMD_SSE 
+#   elif defined(TMX_FORCE_SSE2)
+#       define TMX_SIMD_SSE2
+#       define TMX_SIMD_SSE
 
-#   elif defined(TMX_FORCE_SIMD_SSE) || defined(__SSE__)
+#   elif defined(TMX_FORCE_SSE)
 #       define TMX_SIMD_SSE
 
 #   else 
-#       define TMX_SIMD_NONE
+#       if defined(__AVX2__)  
+#           define TMX_SIMD_AVX2
+#           define TMX_SIMD_AVX
+#           define TMX_SIMD_SSE4
+#           define TMX_SIMD_SSSE3
+#           define TMX_SIMD_SSE3
+#           define TMX_SIMD_SSE2
+#           define TMX_SIMD_SSE
+
+#       elif defined(__AVX__)
+#           define TMX_SIMD_AVX
+#           define TMX_SIMD_SSE4
+#           define TMX_SIMD_SSSE3
+#           define TMX_SIMD_SSE3
+#           define TMX_SIMD_SSE2
+#           define TMX_SIMD_SSE
+
+#       elif defined(__SSE4_2__) || defined(__SSE4_1__)
+#           define TMX_SIMD_SSE4
+#           define TMX_SIMD_SSSE3
+#           define TMX_SIMD_SSE3
+#           define TMX_SIMD_SSE2
+#           define TMX_SIMD_SSE
+
+#       elif defined(__SSSE3__) 
+#           define TMX_SIMD_SSSE3
+#           define TMX_SIMD_SSE3
+#           define TMX_SIMD_SSE2
+#           define TMX_SIMD_SSE
+
+#       elif defined(__SSE3__) 
+#           define TMX_SIMD_SSE3
+#           define TMX_SIMD_SSE2
+#           define TMX_SIMD_SSE
+
+
+#       elif defined(__SSE2__)
+#           define TMX_SIMD_SSE2 
+#           define TMX_SIMD_SSE 
+
+#       elif defined(__SSE__)
+#           define TMX_SIMD_SSE
+
+#       else 
+#           define TMX_SIMD_NONE
+
+#       endif
 
 #   endif
 
@@ -90,6 +114,43 @@
 #   define TMX_SIMD_NONE
 
 #endif
+
+
+
+
+#if !defined(TMX_SET_COORDINATE_SYSTEM_LH) && !defined(TMX_SET_COORDINATE_SYSTEM_RH)
+ 
+#   error Coordinate system (Left-Handed or Right-Handed) not specified ! Use TMX_SET_COORDINATE_SYSTEM_LH or TMX_SET_COORDINATE_SYSTEM_RH.
+#endif
+
+
+#if !defined(TMX_SET_Z_RANGE_0_1) && !defined(TMX_SET_Z_RANGE_N1_1)
+ 
+#   error Z-range ([0; 1] or [-1; 1]) not specified ! Use TMX_SET_Z_RANGE_0_1 or TMX_SET_Z_RANGE_N1_1.
+#endif
+
+
+#if !defined(TMX_SET_Y_AXIS_UPWARDS) && !defined(TMX_SET_Y_AXIS_DOWNWARDS)
+ 
+#   error Y axis direction (upwards or downwards) not specified ! Use TMX_SET_Y_AXIS_UPWARDS or TMX_SET_Y_AXIS_DOWNWARDS.
+#endif
+
+
+#if !defined(TMX_SET_ROTATION_ORDER_XYZ) && !defined(TMX_SET_ROTATION_ORDER_XZY) && !defined(TMX_SET_ROTATION_ORDER_YXZ) && \
+    !defined(TMX_SET_ROTATION_ORDER_YZX) && !defined(TMX_SET_ROTATION_ORDER_ZXY) && !defined(TMX_SET_ROTATION_ORDER_ZYX) 
+
+#   error Rotation order (XYZ, XZY, YXZ, YZX, ZXY or ZYX) not specified ! Use TMX_SET_ROTATION_SYSTEM_... with ... being either XYZ, XZY, YXZ, YZX, ZXY or ZYX.
+#endif
+
+
+#if !defined(TMX_SET_ROTATION_TYPE_INTRINSIC) && !defined(TMX_SET_ROTATION_TYPE_EXTRINSIC) 
+
+#   error State of the rotation axis (rotating or static) not specified ! Use TMX_SET_ROTATION_TYPE_INSTRINSIC or TMX_SET_ROTATION_TYPE_EXTRINSIC.
+#endif
+
+
+
+
 
 
 #if defined(TMX_SIMD_AVX)
@@ -113,15 +174,44 @@
 #endif
 
 
-/* #define TMX_ALIGN_AS(type) \
-       #if defined(TMX_COMPILER_MSVC) 
-           alignas(sizeof(type) * 4)
-       #endif */
 
 
-#define TMX_INLINE inline // or change to forceinline
+
+#if !defined(TMX_SIMD_NONE)
+#if defined(TMX_COMPILER_MSVC) 
+#   define TMX_ALIGN_(type) __declspec(align(sizeof(type) * 4))
+
+#else
+#   define TMX_ALIGN_(type) __attribute__((aligned(sizeof(type) * 4)))
+#endif
+
+#else
+#   define TMX_ALIGN_(type) 
+
+#endif
 
 
-#define TMX_STATIC_ASSERT(cond, mes) static_assert(cond, mes) 
-#define TMX_ASSERT_INDEX(i, max) static_assert(i < max, "The specified index is too large !")
+
+
+#if defined(TMX_FORCE_ALWAYS_INLINE)
+#   if defined(TMX_COMPILER_MSVC)
+#       define TMX_INLINE __forceinline
+
+#   else
+#       define TMX_INLINE __attribute__((always_inline))
+
+#   endif
+
+#elif defined(TMX_FORCE_NO_INLINE)
+#   define TMX_INLINE 
+
+#else
+#   define TMX_INLINE inline
+
+#endif 
+
+
+
+
+
 

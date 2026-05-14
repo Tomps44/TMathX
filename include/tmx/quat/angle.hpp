@@ -5,21 +5,7 @@
 
 namespace tmx
 {
-    enum class RotationOrder
-    {
-        XYZ, 
-        XZY,
-        YXZ,
-        YZX,
-        ZXY,
-        ZYX
-    };
-    enum class RotationMode
-    {
-        Intrinsic,
-        Extrinsic
-    };
-
+    
     namespace Qua
     {
         /// @brief Generates a Quaternion from an axis and an angle 
@@ -29,12 +15,16 @@ namespace tmx
         TMX_INLINE constexpr quat<T> FromAxisAngle(const vec<3, T>& u, T angle) noexcept;
 
 
-        template<typename T, RotationOrder rotOrder = RotationOrder::YXZ, RotationMode rotMode = RotationMode::Intrinsic>
+        template<typename T>
         TMX_INLINE constexpr quat<T> FromEuler(T x, T y, T z) noexcept;
-        template<typename T, RotationOrder rotOrder = RotationOrder::YXZ, RotationMode rotMode = RotationMode::Intrinsic>
+        template<typename T>
+        TMX_INLINE constexpr quat<T> FromEuler(const vec<3, T>& angles) noexcept;
+        template<typename T>
         TMX_INLINE constexpr vec<3, T> ToEuler(const quat<T>& q) noexcept;
+    }
 
-
+    namespace tmxDetail
+    {
         /// @brief Generates a Quaternion from three angles. His rotation order is XYZ.
         /// @param x The angle to rotate by on the X axis, `IN DEGREES`
         /// @param y The angle to rotate by on the Y axis, `IN DEGREES`
@@ -109,7 +99,7 @@ namespace tmx
         template<typename T>
         TMX_INLINE constexpr vec<3, T> ToEulerZYX(const quat<T>& q) noexcept;
 
-    } // namespace Qua 
+    } // namespace Detail
 
 } // namespace tmx
 

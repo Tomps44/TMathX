@@ -22,139 +22,122 @@ namespace tmx
         //                 from/to Euler wrapper
         // ------------------------------------------------------
 
-        template<typename T, RotationOrder rotOrder, RotationMode rotMode>
+        template<typename T>
         TMX_INLINE constexpr quat<T> FromEuler(T x, T y, T z) noexcept
         {
-            if constexpr (rotMode == RotationMode::Intrinsic)
-            {
-                if constexpr (rotOrder == RotationOrder::XYZ)
-                {
-                    return Qua::FromEulerXYZ(x, y, z);
-                }
-                else if constexpr (rotOrder == RotationOrder::XZY)
-                {
-                    return Qua::FromEulerXZY(x, y, z);
-                }
-                else if constexpr (rotOrder == RotationOrder::YXZ)
-                {
-                    return Qua::FromEulerYXZ(x, y, z);
-                }
-                else if constexpr (rotOrder == RotationOrder::YZX)
-                {
-                    return Qua::FromEulerYZX(x, y, z);
-                }
-                else if constexpr (rotOrder == RotationOrder::ZXY)
-                {
-                    return Qua::FromEulerZXY(x, y, z);
-                }
-                else // rotOrder = RotationOrder::ZYX
-                {
-                    return Qua::FromEulerZYX(x, y, z);
-                }
-            }
-            else // rotMode = RotationMode::Extrinsic
-            {
-                if constexpr (rotOrder == RotationOrder::XYZ)
-                {
-                    return Qua::FromEulerZYX(x, y, z);
-                }
-                else if constexpr (rotOrder == RotationOrder::XZY)
-                {
-                    return Qua::FromEulerYZX(x, y, z);
-                }
-                else if constexpr (rotOrder == RotationOrder::YXZ)
-                {
-                    return Qua::FromEulerZXY(x, y, z);
-                }
-                else if constexpr (rotOrder == RotationOrder::YZX)
-                {
-                    return Qua::FromEulerXZY(x, y, z);
-                }
-                else if constexpr (rotOrder == RotationOrder::ZXY)
-                {
-                    return Qua::FromEulerYXZ(x, y, z);
-                }
-                else // rotOrder = RotationOrder::ZYX
-                {
-                    return Qua::FromEulerXYZ(x, y, z);
-                }
-            }
+#           if defined(TMX_SET_ROTATION_TYPE_INTRINSIC)
+#               if defined(TMX_SET_ROTATION_ORDER_XYZ)
+                    return tmxDetail::FromEulerXYZ(x, y, z);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_XZY)
+                    return tmxDetail::FromEulerXZY(x, y, z);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_YXZ)
+                    return tmxDetail::FromEulerYXZ(x, y, z);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_YZX)
+                    return tmxDetail::FromEulerYZX(x, y, z);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_ZXY)
+                    return tmxDetail::FromEulerZXY(x, y, z);
+
+#               else // TMX_SET_ROTATION_ORDER_ZYX
+                    return tmxDetail::FromEulerZYX(x, y, z);
+
+                #endif
+#           else // TMX_SET_ROTATION_TYPE_EXTRINSIC
+#               if defined(TMX_SET_ROTATION_ORDER_XYZ)
+                    return tmxDetail::FromEulerZYX(x, y, z);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_XZY)
+                    return tmxDetail::FromEulerYZX(x, y, z);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_YXZ)
+                    return tmxDetail::FromEulerZXY(x, y, z);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_YZX)
+                    return tmxDetail::FromEulerXZY(x, y, z);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_ZXY)
+                    return tmxDetail::FromEulerYXZ(x, y, z);
+
+#               else // TMX_SET_ROTATION_ORDER_ZYX
+                    return tmxDetail::FromEulerXYZ(x, y, z);
+
+                #endif
+
+#           endif
         }
 
 
-        template<typename T, RotationOrder rotOrder, RotationMode rotMode>
+        template<typename T>
+        TMX_INLINE constexpr quat<T> FromEuler(const vec<3, T>& angles) noexcept
+        {
+            return FromEuler(angles.x, angles.y, angles.z);
+        }
+
+
+
+        template<typename T>
         TMX_INLINE constexpr vec<3, T> ToEuler(const quat<T>& q) noexcept
         {
-            if constexpr (rotMode == RotationMode::Intrinsic)
-            {
-                if constexpr (rotOrder == RotationOrder::XYZ)
-                {
-                    return Qua::ToEulerXYZ(q);
-                }
-                else if constexpr (rotOrder == RotationOrder::XZY)
-                {
-                    return Qua::ToEulerXZY(q);
-                }
-                else if constexpr (rotOrder == RotationOrder::YXZ)
-                {
-                    return Qua::ToEulerYXZ(q);
-                }
-                else if constexpr (rotOrder == RotationOrder::YZX)
-                {
-                    return Qua::ToEulerYZX(q);
-                }
-                else if constexpr (rotOrder == RotationOrder::ZXY)
-                {
-                    return Qua::ToEulerZXY(q);
-                }
-                else // rotOrder = RotationOrder::ZYX
-                {
-                    return Qua::ToEulerZYX(q);
-                }
-            }
-            else // rotMode = RotationMode::Extrinsic
-            {
-                if constexpr (rotOrder == RotationOrder::XYZ)
-                {
-                    return Qua::ToEulerZYX(q);
-                }
-                else if constexpr (rotOrder == RotationOrder::XZY)
-                {
-                    return Qua::ToEulerYZX(q);
-                }
-                else if constexpr (rotOrder == RotationOrder::YXZ)
-                {
-                    return Qua::ToEulerZXY(q);
-                }
-                else if constexpr (rotOrder == RotationOrder::YZX)
-                {
-                    return Qua::ToEulerXZY(q);
-                }
-                else if constexpr (rotOrder == RotationOrder::ZXY)
-                {
-                    return Qua::ToEulerYXZ(q);
-                }
-                else // rotOrder = RotationOrder::ZYX
-                {
-                    return Qua::ToEulerXYZ(q);
-                }
-            }
+#           if defined(TMX_SET_ROTATION_TYPE_INTRINSIC)
+#               if defined(TMX_SET_ROTATION_ORDER_XYZ)
+                    return tmxDetail::ToEulerXYZ(q);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_XZY)
+                    return tmxDetail::ToEulerXZY(q);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_YXZ)
+                    return tmxDetail::ToEulerYXZ(q);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_YZX)
+                    return tmxDetail::ToEulerYZX(q);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_ZXY)
+                    return tmxDetail::ToEulerZXY(q);
+
+#               else // TMX_SET_ROTATION_ORDER_ZYX
+                    return tmxDetail::ToEulerZYX(q);
+
+                #endif
+#           else // TMX_SET_ROTATION_TYPE_EXTRINSIC
+#               if defined(TMX_SET_ROTATION_ORDER_XYZ)
+                    return tmxDetail::ToEulerZYX(q);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_XZY)
+                    return tmxDetail::ToEulerYZX(q);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_YXZ)
+                    return tmxDetail::ToEulerZXY(q);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_YZX)
+                    return tmxDetail::ToEulerXZY(q);
+
+#               elif defined(TMX_SET_ROTATION_ORDER_ZXY)
+                    return tmxDetail::ToEulerYXZ(q);
+
+#               else // TMX_SET_ROTATION_ORDER_ZYX
+                    return tmxDetail::ToEulerXYZ(q);
+
+                #endif
+
+#           endif
         }
+    
+    } // namespace Qua
 
-        // ToEuler...
-
-        // template<typename T>
-        // TMX_INLINE constexpr quat<T> FromEuler<T, RotationOrder::XYZ, RotationMode::Intrinsic>(T x, T y, T z) noexcept
-        // {
-        //     return Qua::FromEulerXYZ(x, y, z);
-        // }
+        
 
 
+    
+    
+    namespace tmxDetail
+    {
+        
         // ------------------------------------------------------
         //                  FromEuler functions
         // ------------------------------------------------------
-
-
 
         template<typename T>
         TMX_INLINE constexpr quat<T> FromEulerXYZ(T x, T y, T z) noexcept
@@ -519,6 +502,6 @@ namespace tmx
             return res * static_cast<T>(57.2957795130823208766546184023127353);
         }
 
-    } // namespace Qua
+    } // namespace tmxDetail
     
 } // namespace tmx

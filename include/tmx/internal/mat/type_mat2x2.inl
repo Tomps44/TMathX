@@ -28,6 +28,16 @@ namespace tmx
     : columns{colType(m[0]), colType(m[1])}
     {}
 
+    template<typename T>
+    TMX_INLINE constexpr mat<2, 2, T>::mat(const mat<3, 3, T>& m) noexcept
+    : columns{colType(m[0][0], m[0][1]), colType(m[1][0], m[1][1])}
+    {}
+
+    template<typename T>
+    TMX_INLINE constexpr mat<2, 2, T>::mat(const mat<4, 4, T>& m) noexcept
+    : columns{colType(m[0][0], m[0][1]), colType(m[1][0], m[1][1])}
+    {}
+
 
 
 
