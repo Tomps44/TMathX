@@ -27,42 +27,42 @@ namespace tmx
         {
 #           if defined(TMX_SET_ROTATION_TYPE_INTRINSIC)
 #               if defined(TMX_SET_ROTATION_ORDER_XYZ)
-                    return tmxDetail::FromEulerXYZ(x, y, z);
+                    return tmxDetail::FromEuler_XYZ(x, y, z);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_XZY)
-                    return tmxDetail::FromEulerXZY(x, y, z);
+                    return tmxDetail::FromEuler_XZY(x, y, z);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_YXZ)
-                    return tmxDetail::FromEulerYXZ(x, y, z);
+                    return tmxDetail::FromEuler_YXZ(x, y, z);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_YZX)
-                    return tmxDetail::FromEulerYZX(x, y, z);
+                    return tmxDetail::FromEuler_YZX(x, y, z);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_ZXY)
-                    return tmxDetail::FromEulerZXY(x, y, z);
+                    return tmxDetail::FromEuler_ZXY(x, y, z);
 
 #               else // TMX_SET_ROTATION_ORDER_ZYX
-                    return tmxDetail::FromEulerZYX(x, y, z);
+                    return tmxDetail::FromEuler_ZYX(x, y, z);
 
                 #endif
 #           else // TMX_SET_ROTATION_TYPE_EXTRINSIC
 #               if defined(TMX_SET_ROTATION_ORDER_XYZ)
-                    return tmxDetail::FromEulerZYX(x, y, z);
+                    return tmxDetail::FromEuler_ZYX(x, y, z);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_XZY)
-                    return tmxDetail::FromEulerYZX(x, y, z);
+                    return tmxDetail::FromEuler_YZX(x, y, z);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_YXZ)
-                    return tmxDetail::FromEulerZXY(x, y, z);
+                    return tmxDetail::FromEuler_ZXY(x, y, z);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_YZX)
-                    return tmxDetail::FromEulerXZY(x, y, z);
+                    return tmxDetail::FromEuler_XZY(x, y, z);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_ZXY)
-                    return tmxDetail::FromEulerYXZ(x, y, z);
+                    return tmxDetail::FromEuler_YXZ(x, y, z);
 
 #               else // TMX_SET_ROTATION_ORDER_ZYX
-                    return tmxDetail::FromEulerXYZ(x, y, z);
+                    return tmxDetail::FromEuler_XYZ(x, y, z);
 
                 #endif
 
@@ -83,42 +83,42 @@ namespace tmx
         {
 #           if defined(TMX_SET_ROTATION_TYPE_INTRINSIC)
 #               if defined(TMX_SET_ROTATION_ORDER_XYZ)
-                    return tmxDetail::ToEulerXYZ(q);
+                    return tmxDetail::ToEuler_XYZ(q);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_XZY)
-                    return tmxDetail::ToEulerXZY(q);
+                    return tmxDetail::ToEuler_XZY(q);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_YXZ)
-                    return tmxDetail::ToEulerYXZ(q);
+                    return tmxDetail::ToEuler_YXZ(q);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_YZX)
-                    return tmxDetail::ToEulerYZX(q);
+                    return tmxDetail::ToEuler_YZX(q);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_ZXY)
-                    return tmxDetail::ToEulerZXY(q);
+                    return tmxDetail::ToEuler_ZXY(q);
 
 #               else // TMX_SET_ROTATION_ORDER_ZYX
-                    return tmxDetail::ToEulerZYX(q);
+                    return tmxDetail::ToEuler_ZYX(q);
 
                 #endif
 #           else // TMX_SET_ROTATION_TYPE_EXTRINSIC
 #               if defined(TMX_SET_ROTATION_ORDER_XYZ)
-                    return tmxDetail::ToEulerZYX(q);
+                    return tmxDetail::ToEuler_ZYX(q);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_XZY)
-                    return tmxDetail::ToEulerYZX(q);
+                    return tmxDetail::ToEuler_YZX(q);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_YXZ)
-                    return tmxDetail::ToEulerZXY(q);
+                    return tmxDetail::ToEuler_ZXY(q);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_YZX)
-                    return tmxDetail::ToEulerXZY(q);
+                    return tmxDetail::ToEuler_XZY(q);
 
 #               elif defined(TMX_SET_ROTATION_ORDER_ZXY)
-                    return tmxDetail::ToEulerYXZ(q);
+                    return tmxDetail::ToEuler_YXZ(q);
 
 #               else // TMX_SET_ROTATION_ORDER_ZYX
-                    return tmxDetail::ToEulerXYZ(q);
+                    return tmxDetail::ToEuler_XYZ(q);
 
                 #endif
 
@@ -140,7 +140,7 @@ namespace tmx
         // ------------------------------------------------------
 
         template<typename T>
-        TMX_INLINE constexpr quat<T> FromEulerXYZ(T x, T y, T z) noexcept
+        TMX_INLINE constexpr quat<T> FromEuler_XYZ(T x, T y, T z) noexcept
         {
             const T halfX = x * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
             const T halfY = y * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
@@ -162,7 +162,7 @@ namespace tmx
             );
         }
         template<typename T>
-        TMX_INLINE constexpr quat<T> FromEulerXZY(T x, T y, T z) noexcept
+        TMX_INLINE constexpr quat<T> FromEuler_XZY(T x, T y, T z) noexcept
         {
             const T halfX = x * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
             const T halfY = y * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
@@ -184,7 +184,7 @@ namespace tmx
             );
         }
         template<typename T>
-        TMX_INLINE constexpr quat<T> FromEulerYXZ(T x, T y, T z) noexcept
+        TMX_INLINE constexpr quat<T> FromEuler_YXZ(T x, T y, T z) noexcept
         {
             const T halfX = x * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
             const T halfY = y * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
@@ -196,7 +196,7 @@ namespace tmx
             const T sy = std::sin(halfY);
             const T cz = std::cos(halfZ); 
             const T sz = std::sin(halfZ);
-
+            
 
             return quat<T>(
                 cx * cy * cz + sx * sy * sz,
@@ -206,7 +206,7 @@ namespace tmx
             );
         }
         template<typename T>
-        TMX_INLINE constexpr quat<T> FromEulerYZX(T x, T y, T z) noexcept
+        TMX_INLINE constexpr quat<T> FromEuler_YZX(T x, T y, T z) noexcept
         {
             const T halfX = x * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
             const T halfY = y * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
@@ -228,7 +228,7 @@ namespace tmx
             );
         }
         template<typename T>
-        TMX_INLINE constexpr quat<T> FromEulerZXY(T x, T y, T z) noexcept
+        TMX_INLINE constexpr quat<T> FromEuler_ZXY(T x, T y, T z) noexcept
         {
             const T halfX = x * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
             const T halfY = y * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
@@ -250,7 +250,7 @@ namespace tmx
             );
         }
         template<typename T>
-        TMX_INLINE constexpr quat<T> FromEulerZYX(T x, T y, T z) noexcept
+        TMX_INLINE constexpr quat<T> FromEuler_ZYX(T x, T y, T z) noexcept
         {
             const T halfX = x * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
             const T halfY = y * static_cast<T>(0.5) * static_cast<T>(0.0174532925199432957691391462423657899L);
@@ -311,7 +311,7 @@ namespace tmx
 
 
         template<typename T>
-        TMX_INLINE constexpr vec<3, T> ToEulerXYZ(const quat<T>& q) noexcept
+        TMX_INLINE constexpr vec<3, T> ToEuler_XYZ(const quat<T>& q) noexcept
         {
             const T sy = static_cast<T>(2) * (q.x * q.z + q.w * q.y);
             const T sySq = sy * sy;
@@ -345,7 +345,7 @@ namespace tmx
         }
 
         template<typename T>
-        TMX_INLINE constexpr vec<3, T> ToEulerXZY(const quat<T>& q) noexcept
+        TMX_INLINE constexpr vec<3, T> ToEuler_XZY(const quat<T>& q) noexcept
         {
             const T sz = -(static_cast<T>(2) * (q.x * q.y - q.w * q.z));
             const T szSq = sz * sz;
@@ -377,7 +377,7 @@ namespace tmx
         }
 
         template<typename T>
-        TMX_INLINE constexpr vec<3, T> ToEulerYXZ(const quat<T>& q) noexcept
+        TMX_INLINE constexpr vec<3, T> ToEuler_YXZ(const quat<T>& q) noexcept
         {
             const T sx = -(static_cast<T>(2) * (q.y * q.z - q.w * q.x));
             const T sxSq = sx * sx;
@@ -409,7 +409,7 @@ namespace tmx
         }
 
         template<typename T>
-        TMX_INLINE constexpr vec<3, T> ToEulerYZX(const quat<T>& q) noexcept
+        TMX_INLINE constexpr vec<3, T> ToEuler_YZX(const quat<T>& q) noexcept
         {
             const T sz = static_cast<T>(2) * (q.x * q.y + q.w * q.z);
             const T szSq = sz * sz;
@@ -440,7 +440,7 @@ namespace tmx
         }
 
         template<typename T>
-        TMX_INLINE constexpr vec<3, T> ToEulerZXY(const quat<T>& q) noexcept
+        TMX_INLINE constexpr vec<3, T> ToEuler_ZXY(const quat<T>& q) noexcept
         {
             const T sx = static_cast<T>(2) * (q.y * q.z + q.w * q.x);
             const T sxSq = sx * sx;
@@ -472,7 +472,7 @@ namespace tmx
         }
 
         template<typename T>
-        TMX_INLINE constexpr vec<3, T> ToEulerZYX(const quat<T>& q) noexcept
+        TMX_INLINE constexpr vec<3, T> ToEuler_ZYX(const quat<T>& q) noexcept
         {
             const T sy = -(static_cast<T>(2) * (q.x * q.z - q.w * q.y));
             const T sySq = sy * sy;

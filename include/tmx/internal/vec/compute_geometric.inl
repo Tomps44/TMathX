@@ -83,7 +83,7 @@ namespace tmx
         {
             TMX_INLINE static constexpr T call(const vec<S, T>& v) noexcept
             {
-                return std::sqrt(internal::vecDot<S, T, internal::useSimd<S, T>::value>::call(v, v));
+                return std::sqrt(Vec::Dot(v, v));
             }
         };
 
@@ -103,8 +103,10 @@ namespace tmx
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& v) noexcept
             {
+                const T invLen = static_cast<T>(1) / Vec::Length(v);
+
                 return vec<S, T>(
-                    v / Vec::Length(v)
+                    v * invLen
                 );
             }
         };
@@ -128,7 +130,7 @@ namespace tmx
         template<int S, typename T>
         TMX_INLINE constexpr T LengthSquared(const vec<S, T>& v) noexcept
         {
-            return internal::vecDot<S, T, internal::useSimd<S, T>::value>::call(v, v);
+            return Vec::Dot(v, v);
         }
 
         template<int S, typename T>
@@ -140,7 +142,9 @@ namespace tmx
         template<int S, typename T>
         TMX_INLINE constexpr T DistanceSquared(const vec<S, T>& a, const vec<S, T>& b) noexcept
         {
-            return internal::vecDot<S, T, internal::useSimd<S, T>::value>::call(b - a, b - a);
+            const vec<S, T> v = b - a;
+
+            return Vec::Dot(v, v);
         }
 
         template<int S, typename T>
@@ -184,9 +188,7 @@ namespace tmx
             // base * ( proj • base / ||base||² )
             //                       base • base
 
-            return base * 
-                (internal::vecDot<S, T, internal::useSimd<S, T>::value>::call(proj, base) / 
-                internal::vecDot<S, T, internal::useSimd<S, T>::value>::call(base, base));
+            return base * (Vec::Dot(proj, base) / Vec::Dot(base, base));
         }
 
 
@@ -197,7 +199,8 @@ namespace tmx
 
             if (sqMag > maxLength * maxLength)
             {
-                return (v / std::sqrt(sqMag)) * maxLength;
+                const T invLen = static_cast<T>(1) / (std::sqrt(sqMag));
+                return (v * invLen) * maxLength;
             }
 
             return v;
@@ -206,3 +209,8 @@ namespace tmx
 
     } // namespace Vec
 }
+
+#if !defined(TMX_SIMD_NONE)
+#   include "tmx/internal/simd/vec_compute_geometric_simd.inl"
+
+#endif

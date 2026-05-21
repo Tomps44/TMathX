@@ -2,7 +2,7 @@
 
 namespace tmx
 {
-    namespace Mat
+    namespace tmxDetail
     {
         template<typename T>
         TMX_INLINE constexpr mat<4, 4, T> Perspective_LH_Z0_YUP(T fovY, T aspect, T zNear, T zFar) noexcept
@@ -146,7 +146,8 @@ namespace tmx
 
 
         template<typename T>
-        TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_Z0_YUP(T left, T right, T bottom, T top, T near, T far) noexcept
+        TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_Z0(T left, T right, T bottom, T top, T near, T far) noexcept
+        // TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_Z0_YUP(T left, T right, T bottom, T top, T near, T far) noexcept
         {
             mat<4, 4, T> res;
 
@@ -165,7 +166,8 @@ namespace tmx
         }
 
         template<typename T>
-        TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_Z0_YUP(T left, T right, T bottom, T top, T near, T far) noexcept
+        TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_Z0(T left, T right, T bottom, T top, T near, T far) noexcept
+        // TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_Z0_YUP(T left, T right, T bottom, T top, T near, T far) noexcept
         {
             mat<4, 4, T> res;
 
@@ -183,46 +185,47 @@ namespace tmx
             return res;
         }
 
+        // template<typename T>
+        // TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_Z0_YDOWN(T left, T right, T bottom, T top, T near, T far) noexcept
+        // {
+        //     mat<4, 4, T> res;
+
+        //     const T invRightMinusLeft = static_cast<T>(1) / (right - left); 
+        //     const T invTopMinusBottom = static_cast<T>(1) / (top - bottom); 
+        //     const T invFarMinusNear = static_cast<T>(1) / (far - near); 
+
+        //     res[0][0] = static_cast<T>(2) * invRightMinusLeft;
+        //     res[1][1] = static_cast<T>(-2) * invTopMinusBottom;
+        //     res[2][2] = static_cast<T>(1) * invFarMinusNear;
+        //     res[3][0] = -(right + left) * invRightMinusLeft;
+        //     res[3][1] = (top + bottom) * invTopMinusBottom;
+        //     res[3][2] = -near * invFarMinusNear;
+
+        //     return res;
+        // }
+
+        // template<typename T>
+        // TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_Z0_YDOWN(T left, T right, T bottom, T top, T near, T far) noexcept
+        // {
+        //     mat<4, 4, T> res;
+
+        //     const T invRightMinusLeft = static_cast<T>(1) / (right - left); 
+        //     const T invTopMinusBottom = static_cast<T>(1) / (top - bottom); 
+        //     const T invFarMinusNear = static_cast<T>(1) / (far - near); 
+
+        //     res[0][0] = static_cast<T>(2) * invRightMinusLeft;
+        //     res[1][1] = static_cast<T>(-2) * invTopMinusBottom;
+        //     res[2][2] = static_cast<T>(-1) * invFarMinusNear;
+        //     res[3][0] = -(right + left) * invRightMinusLeft;
+        //     res[3][1] = (top + bottom) * invTopMinusBottom;
+        //     res[3][2] = near * invFarMinusNear;
+
+        //     return res;
+        // }
+
         template<typename T>
-        TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_Z0_YDOWN(T left, T right, T bottom, T top, T near, T far) noexcept
-        {
-            mat<4, 4, T> res;
-
-            const T invRightMinusLeft = static_cast<T>(1) / (right - left); 
-            const T invTopMinusBottom = static_cast<T>(1) / (top - bottom); 
-            const T invFarMinusNear = static_cast<T>(1) / (far - near); 
-
-            res[0][0] = static_cast<T>(2) * invRightMinusLeft;
-            res[1][1] = static_cast<T>(-2) * invTopMinusBottom;
-            res[2][2] = static_cast<T>(1) * invFarMinusNear;
-            res[3][0] = -(right + left) * invRightMinusLeft;
-            res[3][1] = (top + bottom) * invTopMinusBottom;
-            res[3][2] = -near * invFarMinusNear;
-
-            return res;
-        }
-
-        template<typename T>
-        TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_Z0_YDOWN(T left, T right, T bottom, T top, T near, T far) noexcept
-        {
-            mat<4, 4, T> res;
-
-            const T invRightMinusLeft = static_cast<T>(1) / (right - left); 
-            const T invTopMinusBottom = static_cast<T>(1) / (top - bottom); 
-            const T invFarMinusNear = static_cast<T>(1) / (far - near); 
-
-            res[0][0] = static_cast<T>(2) * invRightMinusLeft;
-            res[1][1] = static_cast<T>(-2) * invTopMinusBottom;
-            res[2][2] = static_cast<T>(-1) * invFarMinusNear;
-            res[3][0] = -(right + left) * invRightMinusLeft;
-            res[3][1] = (top + bottom) * invTopMinusBottom;
-            res[3][2] = near * invFarMinusNear;
-
-            return res;
-        }
-
-        template<typename T>
-        TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_ZN1_YUP(T left, T right, T bottom, T top, T near, T far) noexcept
+        TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_ZN1(T left, T right, T bottom, T top, T near, T far) noexcept
+        // TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_ZN1_YUP(T left, T right, T bottom, T top, T near, T far) noexcept
         {
             mat<4, 4, T> res;
 
@@ -241,7 +244,8 @@ namespace tmx
         }
 
         template<typename T>
-        TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_ZN1_YUP(T left, T right, T bottom, T top, T near, T far) noexcept
+        TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_ZN1(T left, T right, T bottom, T top, T near, T far) noexcept
+        // TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_ZN1_YUP(T left, T right, T bottom, T top, T near, T far) noexcept
         {
             mat<4, 4, T> res;
 
@@ -259,44 +263,121 @@ namespace tmx
             return res;
         }
 
+        // template<typename T>
+        // TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_ZN1_YDOWN(T left, T right, T bottom, T top, T near, T far) noexcept
+        // {
+        //     mat<4, 4, T> res;
+
+        //     const T invRightMinusLeft = static_cast<T>(1) / (right - left); 
+        //     const T invTopMinusBottom = static_cast<T>(1) / (top - bottom); 
+        //     const T invFarMinusNear = static_cast<T>(1) / (far - near); 
+
+        //     res[0][0] = static_cast<T>(2) * invRightMinusLeft;
+        //     res[1][1] = static_cast<T>(-2) * invTopMinusBottom;
+        //     res[2][2] = static_cast<T>(2) * invFarMinusNear;
+        //     res[3][0] = -(right + left) * invRightMinusLeft;
+        //     res[3][1] = (top + bottom) * invTopMinusBottom;
+        //     res[3][2] = (far + near) * invFarMinusNear;
+
+        //     return res;
+        // }
+        // template<typename T>
+        // TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_ZN1_YDOWN(T left, T right, T bottom, T top, T near, T far) noexcept
+        // {
+        //     mat<4, 4, T> res;
+
+        //     const T invRightMinusLeft = static_cast<T>(1) / (right - left); 
+        //     const T invTopMinusBottom = static_cast<T>(1) / (top - bottom); 
+        //     const T invFarMinusNear = static_cast<T>(1) / (far - near); 
+
+        //     res[0][0] = static_cast<T>(2) * invRightMinusLeft;
+        //     res[1][1] = static_cast<T>(-2) * invTopMinusBottom;
+        //     res[2][2] = static_cast<T>(-2) * invFarMinusNear;
+        //     res[3][0] = -(right + left) * invRightMinusLeft;
+        //     res[3][1] = (top + bottom) * invTopMinusBottom;
+        //     res[3][2] = -(far + near) * invFarMinusNear;
+
+        //     return res;
+        // }
+
+    } // namespace tmxDetail
+
+    namespace Mat
+    {
         template<typename T>
-        TMX_INLINE constexpr mat<4, 4, T> Orthographic_LH_ZN1_YDOWN(T left, T right, T bottom, T top, T near, T far) noexcept
+        TMX_INLINE constexpr mat<4, 4, T> Perspective(T fovY, T aspect, T zNear, T zFar) noexcept
         {
-            mat<4, 4, T> res;
+#           if defined(TMX_SET_COORDINATE_SYSTEM_LH)
+#               if defined(TMX_SET_Z_RANGE_0_1)
+#                   if defined(TMX_SET_Y_AXIS_UPWARDS)
+                        return tmxDetail::Perspective_LH_Z0_YUP(fovY, aspect, zNear, zFar);
 
-            const T invRightMinusLeft = static_cast<T>(1) / (right - left); 
-            const T invTopMinusBottom = static_cast<T>(1) / (top - bottom); 
-            const T invFarMinusNear = static_cast<T>(1) / (far - near); 
+#                   else
+                        return tmxDetail::Perspective_LH_Z0_YDOWN(fovY, aspect, zNear, zFar);
 
-            res[0][0] = static_cast<T>(2) * invRightMinusLeft;
-            res[1][1] = static_cast<T>(-2) * invTopMinusBottom;
-            res[2][2] = static_cast<T>(2) * invFarMinusNear;
-            res[3][0] = -(right + left) * invRightMinusLeft;
-            res[3][1] = (top + bottom) * invTopMinusBottom;
-            res[3][2] = (far + near) * invFarMinusNear;
+#                   endif
 
-            return res;
+#               else
+#                   if defined(TMX_SET_Y_AXIS_UPWARDS)
+                        return tmxDetail::Perspective_LH_ZN1_YUP(fovY, aspect, zNear, zFar);
+
+#                   else
+                        return tmxDetail::Perspective_LH_ZN1_YDOWN(fovY, aspect, zNear, zFar);
+
+#                   endif
+
+#               endif
+
+#           else
+#               if defined(TMX_SET_Z_RANGE_0_1)
+#                   if defined(TMX_SET_Y_AXIS_UPWARDS)
+                        return tmxDetail::Perspective_RH_Z0_YUP(fovY, aspect, zNear, zFar);
+
+#                   else
+                        return tmxDetail::Perspective_RH_Z0_YDOWN(fovY, aspect, zNear, zFar);
+
+#                   endif
+
+#               else
+#                   if defined(TMX_SET_Y_AXIS_UPWARDS)
+                        return tmxDetail::Perspective_RH_ZN1_YUP(fovY, aspect, zNear, zFar);
+
+#                   else
+                        return tmxDetail::Perspective_RH_ZN1_YDOWN(fovY, aspect, zNear, zFar);
+
+#                   endif
+
+#               endif
+
+#           endif
         }
+
+
+
         template<typename T>
-        TMX_INLINE constexpr mat<4, 4, T> Orthographic_RH_ZN1_YDOWN(T left, T right, T bottom, T top, T near, T far) noexcept
+        TMX_INLINE constexpr mat<4, 4, T> Orthographic(T left, T right, T bottom, T top, T near, T far) noexcept
         {
-            mat<4, 4, T> res;
+#           if defined(TMX_SET_COORDINATE_SYSTEM_LH)
+#               if defined(TMX_SET_Z_RANGE_0_1)
+                    return tmxDetail::Orthographic_LH_Z0(left, right, bottom, top, near, far);
 
-            const T invRightMinusLeft = static_cast<T>(1) / (right - left); 
-            const T invTopMinusBottom = static_cast<T>(1) / (top - bottom); 
-            const T invFarMinusNear = static_cast<T>(1) / (far - near); 
+#               else
+                    return tmxDetail::Orthographic_LH_ZN1(left, right, bottom, top, near, far);
 
-            res[0][0] = static_cast<T>(2) * invRightMinusLeft;
-            res[1][1] = static_cast<T>(-2) * invTopMinusBottom;
-            res[2][2] = static_cast<T>(-2) * invFarMinusNear;
-            res[3][0] = -(right + left) * invRightMinusLeft;
-            res[3][1] = (top + bottom) * invTopMinusBottom;
-            res[3][2] = -(far + near) * invFarMinusNear;
+#               endif
 
-            return res;
+#           else
+#               if defined(TMX_SET_Z_RANGE_0_1)
+                    return tmxDetail::Orthographic_RH_Z0(left, right, bottom, top, near, far);
+
+#               else
+                    return tmxDetail::Orthographic_RH_ZN1(left, right, bottom, top, near, far);
+
+#               endif
+
+#           endif
         }
-
-        
 
     } // namespace Mat
+
 } // namespace tmx

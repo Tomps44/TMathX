@@ -37,6 +37,11 @@ namespace tmx
         {
             static const bool value = true;
         };
+        template<>
+        struct useSimd<3, float>
+        {
+            static const bool value = true;
+        };
 
         template<>
         struct simdReg<4, float>

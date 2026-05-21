@@ -202,9 +202,6 @@
 
 #   endif
 
-#elif defined(TMX_FORCE_NO_INLINE)
-#   define TMX_INLINE 
-
 #else
 #   define TMX_INLINE inline
 

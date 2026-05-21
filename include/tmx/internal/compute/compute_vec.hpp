@@ -1,5 +1,5 @@
 #pragma once
-#include "tmx/internal/definitions.hpp"
+
 #include "tmx/internal/compute/vec_functors.hpp"
 #include "tmx/internal/compute/compute_equal.hpp"
 
@@ -7,38 +7,38 @@ namespace tmx
 {
     namespace internal
     {
-        template<int S, typename T, bool useSimd>
-        struct vecAdd {};
-        template<int S, typename T, bool useSimd>
-        struct vecSub {};
-        template<int S, typename T, bool useSimd>
-        struct vecMul {};
-        template<int S, typename T, bool useSimd>
-        struct vecDiv {};
-        template<int S, typename T, bool useSimd>
-        struct vecMod {};
-        template<int S, typename T, bool useSimd>
-        struct vecNeg {};
-        template<int S, typename T, bool useSimd>
-        struct vecAnd {};
-        template<int S, typename T, bool useSimd>
-        struct vecOr {};
-        template<int S, typename T, bool useSimd>
-        struct vecXor {};
-        template<int S, typename T, bool useSimd>
-        struct vecNot {};
-        template<int S, typename T, bool useSimd>
-        struct vecShiftLeft {};
-        template<int S, typename T, bool useSimd>
-        struct vecShiftRight {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecAdd {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecSub {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecMul {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecDiv {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecMod {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecNeg {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecAnd {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecOr {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecXor {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecNot {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecShiftLeft {};
+        // template<int S, typename T, bool useSimd>
+        // struct vecShiftRight {};
 
         template<int S, typename T, bool isFloating>
         struct vecEqual {};
     
 
 
-        template<int S, typename T>
-        struct vecAdd<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecAdd
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -50,8 +50,8 @@ namespace tmx
             }
         };
 
-        template<int S, typename T>
-        struct vecSub<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecSub
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -63,8 +63,8 @@ namespace tmx
             }
         };
 
-        template<int S, typename T>
-        struct vecMul<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecMul
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -76,8 +76,8 @@ namespace tmx
             }
         };
 
-        template<int S, typename T>
-        struct vecDiv<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecDiv
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -90,8 +90,8 @@ namespace tmx
         };
 
 
-        template<int S, typename T>
-        struct vecMod<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecMod
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -103,8 +103,8 @@ namespace tmx
             }
         };
 
-        template<int S, typename T>
-        struct vecNeg<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecNeg
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& v)
             {
@@ -118,8 +118,8 @@ namespace tmx
 
 
 
-        template<int S, typename T>
-        struct vecAnd<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecAnd
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -132,8 +132,8 @@ namespace tmx
             }
         };
 
-        template<int S, typename T>
-        struct vecOr<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecOr
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -145,9 +145,8 @@ namespace tmx
                 return v;
             }
         };
-
-        template<int S, typename T>
-        struct vecXor<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecXor
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -158,10 +157,9 @@ namespace tmx
                 }
                 return v;
             }
-        };
-
-        template<int S, typename T>
-        struct vecNot<S, T, false>
+        }; 
+        template<int S, typename T, bool useSimd>
+        struct vecNot
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a)
             {
@@ -174,8 +172,8 @@ namespace tmx
             }
         };
 
-        template<int S>
-        struct vecNot<S, bool, false>
+        template<int S, bool useSimd>
+        struct vecNot<S, bool, useSimd>
         {
             TMX_INLINE static constexpr vec<S, bool> call(const vec<S, bool>& a)
             {
@@ -188,8 +186,8 @@ namespace tmx
             }
         };
 
-        template<int S, typename T>
-        struct vecShiftLeft<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecShiftLeft
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -202,8 +200,8 @@ namespace tmx
             }
         };
 
-        template<int S, typename T>
-        struct vecShiftRight<S, T, false>
+        template<int S, typename T, bool useSimd>
+        struct vecShiftRight
         {
             TMX_INLINE static constexpr vec<S, T> call(const vec<S, T>& a, const vec<S, T>& b)
             {
@@ -254,15 +252,5 @@ namespace tmx
             }
         };
         
-        
-
-        
-
-
-
-#       if !defined(TMX_SIMD_NONE)
-#           include "tmx/internal/compute/compute_vec_simd.inl"
-
-#       endif
     }
 }

@@ -5,24 +5,24 @@ namespace tmx
 {
     namespace internal
     {
-        template<int R, int C, typename T, bool useSimd>
-        struct matAdd {};
-        template<int R, int C, typename T, bool useSimd>
-        struct matSub {};
+        // template<int R, int C, typename T, bool useSimd>
+        // struct matAdd {};
+        // template<int R, int C, typename T, bool useSimd>
+        // struct matSub {};
         template<int R, int C, typename T, bool useSimd>
         struct matMul {};
-        template<int R, int C, typename T, bool useSimd>
-        struct matDiv {};
-        template<int R, int C, typename T, bool useSimd>
-        struct matNeg {};
+        // template<int R, int C, typename T, bool useSimd>
+        // struct matDiv {};
+        // template<int R, int C, typename T, bool useSimd>
+        // struct matNeg {};
 
         template<int R, int C, typename T>
         struct matEqual {};
 
 
 
-        template<int R, int C, typename T>
-        struct matAdd<R, C, T, false>
+        template<int R, int C, typename T, bool useSimd>
+        struct matAdd
         {
             TMX_INLINE static constexpr mat<R, C, T> call(const mat<R, C, T>& a, const mat<R, C, T>& b)
             {
@@ -59,8 +59,8 @@ namespace tmx
             }
         };
 
-        template<int R, int C, typename T>
-        struct matSub<R, C, T, false>
+        template<int R, int C, typename T, bool useSimd>
+        struct matSub
         {
             TMX_INLINE static constexpr mat<R, C, T> call(const mat<R, C, T>& a, const mat<R, C, T>& b)
             {
@@ -97,8 +97,8 @@ namespace tmx
             }
         };
 
-        template<typename T>
-        struct matMul<2, 2, T, false>
+        template<typename T, bool useSimd>
+        struct matMul<2, 2, T, useSimd>
         {
             TMX_INLINE static constexpr mat<2, 2, T> call(const mat<2, 2, T>& a, const mat<2, 2, T>& b)
             {
@@ -128,8 +128,8 @@ namespace tmx
                 return m[0] * v.x + m[1] * v.y;
             }
         };
-        template<typename T>
-        struct matMul<3, 3, T, false>
+        template<typename T, bool useSimd>
+        struct matMul<3, 3, T, useSimd>
         { 
             TMX_INLINE static constexpr mat<3, 3, T> call(const mat<3, 3, T>& m, T scalar)
             {
@@ -194,8 +194,8 @@ namespace tmx
             }
         };
         
-        template<typename T>
-        struct matMul<4, 4, T, false>
+        template<typename T, bool useSimd>
+        struct matMul<4, 4, T, useSimd>
         { 
             TMX_INLINE static constexpr typename mat<4, 4, T>::colType call(const mat<4, 4, T>& m, const typename mat<4, 4, T>::colType& v)
             {
@@ -280,8 +280,8 @@ namespace tmx
         };
         
 
-        template<int R, int C, typename T>
-        struct matDiv<R, C, T, false>
+        template<int R, int C, typename T, bool useSimd>
+        struct matDiv
         {
             TMX_INLINE static constexpr mat<2, 2, T> call(const mat<2, 2, T>& m, T scalar)
             {
@@ -312,8 +312,8 @@ namespace tmx
 
 
 
-        template<int R, int C, typename T>
-        struct matNeg<R, C, T, false>
+        template<int R, int C, typename T, bool useSimd>
+        struct matNeg
         {
             TMX_INLINE static constexpr mat<R, C, T> call(const mat<R, C, T>& m)
             {

@@ -1,24 +1,25 @@
+#include <cmath>
+
 namespace tmx
 {
-    namespace Mat
+    namespace tmxDetail
     {
         template<typename T>
-        TMX_INLINE constexpr mat<3, 3, T> FromQuat(const quat<T>& rot) noexcept
+        TMX_INLINE constexpr mat<3, 3, T> FromQuat_LH(const quat<T>& rot) noexcept
         {
-            const T ww = rot.w * rot.w;
             const T xx = rot.x * rot.x;
             const T yy = rot.y * rot.y;
             const T zz = rot.z * rot.z;
 
             return mat<3, 3, T>(
-                static_cast<T>(1) - static_cast<T>(2) * (yy + zz), static_cast<T>(2) * (tot.x * rot.y - rot.z * rot.w), static_cast<T>(2) * (rot.x * rot.z + rot.y * rot.w),
-                static_cast<T>(2) * (tot.x * rot.y + rot.z * rot.w), static_cast<T>(1) - static_cast<T>(2) * (xx + zz), static_cast<T>(2) * (rot.j * rot.k - rot.x * rot.w),
-                static_cast<T>(2) * (tot.x * rot.z - rot.y * rot.w), static_cast<T>(2) * (rot.y * rot.z + rot.x * rot.w), static_cast<T>(1) - static_cast<T>(2) * (xx + yy)
+                static_cast<T>(1) - static_cast<T>(2) * (yy + zz), static_cast<T>(2) * (rot.x * rot.y + rot.z * rot.w), static_cast<T>(2) * (rot.x * rot.z - rot.y * rot.w),
+                static_cast<T>(2) * (rot.x * rot.y - rot.z * rot.w), static_cast<T>(1) - static_cast<T>(2) * (xx + zz), static_cast<T>(2) * (rot.y * rot.z + rot.x * rot.w),
+                static_cast<T>(2) * (rot.x * rot.z + rot.y * rot.w), static_cast<T>(2) * (rot.y * rot.z - rot.x * rot.w), static_cast<T>(1) - static_cast<T>(2) * (xx + yy)
             );
         }
         
         template<typename T>
-        TMX_INLINE constexpr mat<4, 4, T> FromQuat(const quat<T>& rot) noexcept
+        TMX_INLINE constexpr mat<4, 4, T> FromQuat_4x4_LH(const quat<T>& rot) noexcept
         {
             const T ww = rot.w * rot.w;
             const T xx = rot.x * rot.x;
@@ -28,19 +29,280 @@ namespace tmx
             mat<4, 4, T> res;
 
             res[0][0] =  static_cast<T>(1) - static_cast<T>(2) * (yy + zz);
-            res[1][0] = static_cast<T>(2) * (tot.x * rot.y - rot.z * rot.w);
+            res[1][0] = static_cast<T>(2) * (rot.x * rot.y + rot.z * rot.w);
+            res[2][0] = static_cast<T>(2) * (rot.x * rot.z - rot.y * rot.w);
+
+            res[0][1] = static_cast<T>(2) * (rot.x * rot.y - rot.z * rot.w);
+            res[1][1] = static_cast<T>(1) - static_cast<T>(2) * (xx + zz);
+            res[2][1] = static_cast<T>(2) * (rot.j * rot.k + rot.x * rot.w);
+
+            res[0][2] = static_cast<T>(2) * (rot.x * rot.z + rot.y * rot.w);
+            res[1][2] = static_cast<T>(2) * (rot.y * rot.z - rot.x * rot.w);
+            res[2][2] = static_cast<T>(1) - static_cast<T>(2) * (xx + yy);
+            
+            return res;
+        }
+
+
+
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> FromQuat_RH(const quat<T>& rot) noexcept
+        {
+            const T xx = rot.x * rot.x;
+            const T yy = rot.y * rot.y;
+            const T zz = rot.z * rot.z;
+
+            return mat<3, 3, T>(
+                static_cast<T>(1) - static_cast<T>(2) * (yy + zz), static_cast<T>(2) * (rot.x * rot.y - rot.z * rot.w), static_cast<T>(2) * (rot.x * rot.z + rot.y * rot.w),
+                static_cast<T>(2) * (rot.x * rot.y + rot.z * rot.w), static_cast<T>(1) - static_cast<T>(2) * (xx + zz), static_cast<T>(2) * (rot.y * rot.z - rot.x * rot.w),
+                static_cast<T>(2) * (rot.x * rot.z - rot.y * rot.w), static_cast<T>(2) * (rot.y * rot.z + rot.x * rot.w), static_cast<T>(1) - static_cast<T>(2) * (xx + yy)
+            );
+        }
+        
+        template<typename T>
+        TMX_INLINE constexpr mat<4, 4, T> FromQuat_4x4_RH(const quat<T>& rot) noexcept
+        {
+            const T xx = rot.x * rot.x;
+            const T yy = rot.y * rot.y;
+            const T zz = rot.z * rot.z;
+
+            mat<4, 4, T> res;
+
+            res[0][0] =  static_cast<T>(1) - static_cast<T>(2) * (yy + zz);
+            res[1][0] = static_cast<T>(2) * (rot.x * rot.y - rot.z * rot.w);
             res[2][0] = static_cast<T>(2) * (rot.x * rot.z + rot.y * rot.w);
 
-            res[0][1] = static_cast<T>(2) * (tot.x * rot.y + rot.z * rot.w);
+            res[0][1] = static_cast<T>(2) * (rot.x * rot.y + rot.z * rot.w);
             res[1][1] = static_cast<T>(1) - static_cast<T>(2) * (xx + zz);
-            res[2][1] = static_cast<T>(2) * (rot.j * rot.k - rot.x * rot.w);
+            res[2][1] = static_cast<T>(2) * (rot.y * rot.z - rot.x * rot.w);
 
-            res[0][2] = static_cast<T>(2) * (tot.x * rot.z - rot.y * rot.w);
+            res[0][2] = static_cast<T>(2) * (rot.x * rot.z - rot.y * rot.w);
             res[1][2] = static_cast<T>(2) * (rot.y * rot.z + rot.x * rot.w);
             res[2][2] = static_cast<T>(1) - static_cast<T>(2) * (xx + yy);
             
             return res;
         }
 
+
+
+
+
+        template<typename T>
+        TMX_INLINE constexpr mat<2, 2, T> RotateZ_2x2_LH(T angle) noexcept
+        {
+            const T c = std::cos(angle);
+            const T s = std::sin(angle);
+
+            return mat<2, 2, T>(
+                c, -s,
+                s, c
+            );
+        }
+        template<typename T>
+        TMX_INLINE constexpr mat<2, 2, T> RotateZ_2x2_RH(T angle) noexcept
+        {
+            const T c = std::cos(angle);
+            const T s = std::sin(angle);
+
+            return mat<2, 2, T>(
+                c, s,
+                -s, c
+            );
+        }
+
+
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> RotateZ_LH(T angle) noexcept
+        {
+            const T c = std::cos(angle);
+            const T s = std::sin(angle);
+
+            mat<3, 3, T> res;
+
+            res[0][0] = c;
+            res[1][0] = s;
+            res[0][1] = -s;
+            res[1][1] = c;
+
+            return res;
+        }
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> RotateZ_RH(T angle) noexcept
+        {
+            const T c = std::cos(angle);
+            const T s = std::sin(angle);
+
+            mat<3, 3, T> res;
+
+            res[0][0] = c;
+            res[1][0] = -s;
+            res[0][1] = s;
+            res[1][1] = c;
+
+            return res;
+        }
+
+
+
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> RotateX_LH(T angle) noexcept
+        {
+            const T c = std::cos(angle);
+            const T s = std::sin(angle);
+
+            mat<3, 3, T> res;
+
+            res[1][1] = c;
+            res[2][1] = s;
+            res[1][2] = -s;
+            res[2][2] = c;
+
+            return res;
+        }
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> RotateX_RH(T angle) noexcept
+        {
+            const T c = std::cos(angle);
+            const T s = std::sin(angle);
+
+            mat<3, 3, T> res;
+
+            res[1][1] = c;
+            res[2][1] = -s;
+            res[1][2] = s;
+            res[2][2] = c;
+
+            return res;
+        }
+
+
+
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> RotateY_LH(T angle) noexcept
+        {
+            const T c = std::cos(angle);
+            const T s = std::sin(angle);
+
+            mat<3, 3, T> res;
+
+            res[0][0] = c;
+            res[2][0] = -s;
+            res[0][2] = s;
+            res[2][2] = c;
+
+            return res;
+        }
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> RotateY_RH(T angle) noexcept
+        {
+            const T c = std::cos(angle);
+            const T s = std::sin(angle);
+
+            mat<3, 3, T> res;
+
+            res[0][0] = c;
+            res[2][0] = s;
+            res[0][2] = -s;
+            res[2][2] = c;
+
+            return res;
+        }
+
+    } // namespace tmxDetail
+
+
+
+    namespace Mat
+    {
+
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> FromQuat(const quat<T>& rot) noexcept
+        {
+#           if defined(TMX_SET_COORDINATE_SYSTEM_LH)
+                return tmxDetail::FromQuat_LH(rot);
+
+#           else // TMX_SET_COORDINATE_SYSTEM_RH
+                return tmxDetail::FromQuat_RH(rot);
+
+#           endif
+        }
+
+        template<typename T>
+        TMX_INLINE constexpr mat<4, 4, T> FromQuat_4x4(const quat<T>& rot) noexcept
+        {
+#           if defined(TMX_SET_COORDINATE_SYSTEM_LH)
+                return tmxDetail::FromQuat_4x4_LH(rot);
+
+#           else // TMX_SET_COORDINATE_SYSTEM_RH
+                return tmxDetail::FromQuat_4x4_RH(rot);
+
+#           endif
+        }
+
+
+
+
+        template<typename T>
+        TMX_INLINE constexpr mat<2, 2, T> RotateZ_2x2(T angle) noexcept
+        {
+#           if defined(TMX_SET_COORDINATE_SYSTEM_LH)
+                return tmxDetail::RotateZ_2x2_LH(angle);
+
+#           else // TMX_SET_COORDINATE_SYSTEM_RH
+                return tmxDetail::RotateZ_2x2_RH(angle);
+
+#           endif
+        }
+
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> RotateZ(T angle) noexcept
+        {
+#           if defined(TMX_SET_COORDINATE_SYSTEM_LH)
+                return tmxDetail::RotateZ_LH(angle);
+
+#           else // TMX_SET_COORDINATE_SYSTEM_RH
+                return tmxDetail::RotateZ_RH(angle);
+
+#           endif
+        }
+
+
+
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> RotateX(T angle) noexcept
+        {
+#           if defined(TMX_SET_COORDINATE_SYSTEM_LH)
+                return tmxDetail::RotateX_LH(angle);
+
+#           else // TMX_SET_COORDINATE_SYSTEM_RH
+                return tmxDetail::RotateX_RH(angle);
+
+#           endif
+        }
+
+
+
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> RotateY(T angle) noexcept
+        {
+#           if defined(TMX_SET_COORDINATE_SYSTEM_LH)
+                return tmxDetail::RotateY_LH(angle);
+
+#           else // TMX_SET_COORDINATE_SYSTEM_RH
+                return tmxDetail::RotateY_RH(angle);
+
+#           endif
+        }
+
+
+
+        template<typename T>
+        TMX_INLINE constexpr mat<3, 3, T> FromAxisAngle(const vec<3, T>& axis, T angle) noexcept
+        {
+
+        }
+
     } // namespace Mat
+
+
 } // namespace tmx

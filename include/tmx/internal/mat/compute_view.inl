@@ -2,7 +2,7 @@
 
 namespace tmx
 {
-    namespace Mat
+    namespace tmxDetail
     {
         template<typename T>
         TMX_INLINE constexpr mat<4, 4, T> LookAt_LH(const vec<3, T>& eye, const vec<3, T>& target, const vec<3, T>& worldUp) noexcept
@@ -58,6 +58,22 @@ namespace tmx
             return res;
         }
         
-        
+    } // namespace tmxDetail
+
+    namespace Mat
+    {
+        template<typename T>
+        TMX_INLINE constexpr mat<4, 4, T> LookAt(const vec<3, T>& eye, const vec<3, T>& target, const vec<3, T>& worldUp) noexcept
+        {
+#           if defined(TMX_SET_COORDINATE_SYSTEM_LH)
+                return tmxDetail::LookAt_LH(eye, target, worldUp);
+
+#           else
+                return tmxDetail::LookAt_RH(eye, target, worldUp);
+                
+#           endif
+        }
+
     } // namespace Mat
+    
 } // namespace tmx

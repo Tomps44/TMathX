@@ -35,8 +35,8 @@ namespace tmx
         TMX_INLINE constexpr const T* data() const noexcept { return &(columns[0].x); };
 
 
-        TMX_INLINE constexpr operator mat<2, 2, T>() const noexcept { return mat<2, 2, T>(*this); };
-        TMX_INLINE constexpr operator mat<3, 3, T>() const noexcept { return mat<3, 3, T>(*this); };
+        TMX_INLINE constexpr explicit operator mat<2, 2, T>() const noexcept { return mat<2, 2, T>(*this); };
+        TMX_INLINE constexpr explicit operator mat<3, 3, T>() const noexcept { return mat<3, 3, T>(*this); };
 
 
         TMX_INLINE constexpr colType& operator[](int i);
@@ -45,6 +45,7 @@ namespace tmx
 
         TMX_INLINE constexpr mat<4, 4, T>& operator=(const mat<4, 4, T>& m) noexcept = default;
 
+        
         TMX_INLINE constexpr mat<4, 4, T>& operator+=(const mat<4, 4, T>& m) noexcept;
         TMX_INLINE constexpr mat<4, 4, T>& operator+=(T scalar) noexcept;
 

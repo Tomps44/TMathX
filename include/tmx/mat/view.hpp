@@ -5,7 +5,7 @@
 
 namespace tmx
 {
-    namespace Mat
+    namespace tmxDetail
     {
         /**
          * Generates a `left-handed` view matrix 
@@ -27,7 +27,15 @@ namespace tmx
         template<typename T>
         TMX_INLINE constexpr mat<4, 4, T> LookAt_RH(const vec<3, T>& eye, const vec<3, T>& target, const vec<3, T>& worldUp) noexcept;
         
+    } // namespace tmxDetail
+
+    namespace Mat
+    {
+        template<typename T>
+        TMX_INLINE constexpr mat<4, 4, T> LookAt(const vec<3, T>& eye, const vec<3, T>& target, const vec<3, T>& worldUp) noexcept;
+
     } // namespace Mat
+    
 } // namespace tmx
 
 #include "tmx/internal/mat/compute_view.inl"

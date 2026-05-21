@@ -31,7 +31,7 @@ namespace tmx
 
     template<typename T>
     TMX_INLINE constexpr mat<3, 3, T>::mat(const mat<2, 2, T>& m) noexcept
-    : columns{colType(m[0][0], m[0][1], 0), colType(m[1][0], m[1][1], 0), colType(0)}
+    : columns{colType(m[0][0], m[0][1], 0), colType(m[1][0], m[1][1], 0), colType(0, 0, 1)}
     {}
 
     template<typename T>
