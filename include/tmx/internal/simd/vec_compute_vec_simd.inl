@@ -152,6 +152,20 @@ namespace tmx
         };
 #       endif
 
+
+        template<>
+        struct vecAnd<4, int32_t, true> 
+        {
+            TMX_INLINE static vec<4, int32_t> call(const vec<4, int32_t>& a, const vec<4, int32_t>& b)
+            {
+                vec<4, int32_t> res;
+
+                res.reg = _mm_and_si128(a.reg, b.reg);
+                return res;
+            }
+        };
+
+
 #       endif
     }
 }

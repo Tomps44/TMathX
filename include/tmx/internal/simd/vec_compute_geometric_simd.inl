@@ -27,7 +27,49 @@ namespace tmx
             }
         };
 
-        // ...
+
+
+        template<>
+        struct vecLength<4, float, true>
+        {
+            TMX_INLINE static float call(const vec<4, float>& v) noexcept
+            {
+                return _mm_cvtss_f32(internal::vecLength__m128(v.reg));
+            }
+        };
+        template<>
+        struct vecDistance<4, float, true>
+        {
+            TMX_INLINE static float call(const vec<4, float>& a, const vec<4, float>& b) noexcept
+            {
+                return _mm_cvtss_f32(internal::vecDistance__m128(a.reg, b.reg));
+            }
+        };
+
+
+        template<>
+        struct vecCross<3, float, true>
+        {
+            TMX_INLINE static vec<3, float> call(const vec<4, float>& a, const vec<4, float>& b) noexcept
+            {
+                const vec<4, float> azz(a); 
+                const vec<4, float> bzz(b); 
+
+                const __m128 vec4Cross = internal::vecCross__m128(a.reg, b.reg);
+                vec<4, float> res4; res4.reg = vec4Cross;
+
+                return vec<3, float>(res4);
+            }
+        };
+        template<>
+        struct vecCross<4, float, true>
+        {
+            TMX_INLINE static vec<4, float> call(const vec<4, float>& a, const vec<4, float>& b) noexcept
+            {
+                return _mm_cvtss_f32(internal::vecCross__m128(a.reg, b.reg));
+            }
+        };
+
 
 #       endif
 

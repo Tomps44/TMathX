@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <chrono>
 
 
 // #define TMX_FORCE_SIMD_NONE
@@ -88,20 +89,10 @@ int main()
 
 
 
-    logVec(Vec4Int(4) + Vec4Int(1, 2, 3));
-    logVec(Vec4Int(4) - Vec4Int(1, 2, 3));
-    logVec(Vec4Int(4) * Vec4Int(1, 2, 3));
-    // logVec(Vec4Int(4) / Vec4Int(1, 2, 3));
-
-    // std::cout << ((int32_t)4 / (int32_t)0);
-
-    Mat4x4 m = Mat::Perspective(60.0f * DegToRad, 1.77777f, 0.1F, 50.0f);
-    Mat4x4 m2 = Mat::TRS(Vec3(2.0f), Qua::FromEuler(10.0f, -20.0f, 30.0f), Vec3(2.5f));
-
-    logMat(m);
-    logMat(m2);
-
-    std::cout << Vec::Dot(Vec3(), Vec3());
+    const float val = 3859.278935f;
+    std::cout << InvSqrt(val) << " " << FastInvSqrt(val);
+    
+    
 
 
     

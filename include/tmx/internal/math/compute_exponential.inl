@@ -31,19 +31,18 @@ namespace tmx
         {
             return std::sqrt(val);
         }
-        // template<>
-        // TMX_INLINE constexpr float invSqrt(float val) noexcept
-        // {
-        //     float tmp = val;
-        //     float half = tmp * 0.5f;
+        TMX_INLINE float FastInvSqrt(float val) noexcept
+        {
+            float tmp = val;
+            float half = tmp * 0.5f;
 
-        //     int* p = reinterpret_cast<int*>(const_cast<float*>(&val));
-        //     int i = 0x5f375a86 - (*p >> 1);
-		// 	float* ptmp = reinterpret_cast<float*>(&i);
-		// 	tmp = *ptmp;
-		// 	tmp = tmp * (1.5f - half * tmp * tmp);
-		// 	return tmp;
-        // }
+            int32_t* p = reinterpret_cast<int32_t*>(const_cast<float*>(&val));
+            int32_t i = 0x5f375a86 - (*p >> 1);
+			float* ptmp = reinterpret_cast<float*>(&i);
+			tmp = *ptmp;
+			tmp = tmp * (1.5f - half * tmp * tmp);
+			return tmp;
+        }
         template<typename T>
         TMX_INLINE constexpr T InvSqrt(T val) noexcept
         {

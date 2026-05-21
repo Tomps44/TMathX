@@ -17,6 +17,7 @@ namespace tmx
         TMX_INLINE constexpr T Cbrt(T val) noexcept;
         template<typename T>
         TMX_INLINE constexpr T InvSqrt(T val) noexcept;
+        TMX_INLINE float FastInvSqrt(float val) noexcept;
 
         /// @brief Returns `e`, euler's number, raised to the power `exponent`
         template<typename T>
