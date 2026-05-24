@@ -143,3 +143,8 @@ namespace tmx
     } // namespace Mat
     
 } // namespace tmx
+
+#if !defined(TMX_SIMD_NONE)
+#   include "tmx/internal/simd/mat_geometric.inl"
+
+#endif

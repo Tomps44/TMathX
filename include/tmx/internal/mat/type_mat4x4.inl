@@ -114,3 +114,9 @@ namespace tmx
         return *this;
     }
 }
+
+
+#if !defined(TMX_SIMD_NONE)
+#   include "tmx/internal/simd/mat_compute_mat.inl"
+
+#endif

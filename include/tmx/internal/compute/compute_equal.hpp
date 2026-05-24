@@ -19,12 +19,28 @@ namespace tmx
             }
         };
 
-        template<typename T>
-        struct computeEqual<T, true>
+        template<>
+        struct computeEqual<float, true>
         {
-            TMX_INLINE static constexpr bool call(T a, T b) 
+            TMX_INLINE static constexpr bool call(float a, float b) 
             {
-                return std::abs(b - a) < static_cast<T>(1.0e-06);
+                return std::abs(b - a) < 1.0e-06f;
+            }
+        };
+        template<>
+        struct computeEqual<double, true>
+        {
+            TMX_INLINE static constexpr bool call(double a, double b) 
+            {
+                return std::abs(b - a) < 1.0e-14;
+            }
+        };
+        template<>
+        struct computeEqual<long double, true>
+        {
+            TMX_INLINE static constexpr bool call(long double a, long double b) 
+            {
+                return std::abs(b - a) < 1.0e-17L;
             }
         };
     }

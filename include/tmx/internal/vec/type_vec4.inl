@@ -207,6 +207,6 @@ namespace tmx
 }
 
 #if !defined(TMX_SIMD_NONE)
-#    include "tmx/internal/simd/vec_compute_vec_simd.inl"
+#    include "tmx/internal/simd/vec_compute_vec.inl"
 
 #endif

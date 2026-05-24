@@ -1,7 +1,5 @@
 #pragma once
 
-#include <numbers>
-
 namespace tmx
 {
     namespace tmxDetail
@@ -65,7 +63,7 @@ namespace tmx
         TMX_INLINE constexpr float E = tmxDetail::e_T<float>;
         // The well known constant of 3.1415..., the ratio of the circumference of a circle to its diameter
         TMX_INLINE constexpr float PI = tmxDetail::pi_T<float>;
-        // `PI x 2.00`
+        // `PI x 2.00`, the ratio of the circumference of a circle to its radius
         TMX_INLINE constexpr float TAU = tmxDetail::tau_T<float>;
         // The Golden Ratio, 1.618...
         TMX_INLINE constexpr float PHI = tmxDetail::phi_T<float>;

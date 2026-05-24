@@ -1,3 +1,5 @@
+#pragma once
+
 namespace tmx
 {
     namespace internal
@@ -92,7 +94,7 @@ namespace tmx
 
 
         // I don't think it is useful to implement it for HighP vectors (__m256d), 
-        // since every single function relie on the dot product, 
+        // since every single function relies on the dot product, 
         // and the dp for __m256d is not implemented by default, 
         // and the alternative is less precise and slower
 

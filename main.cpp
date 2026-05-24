@@ -53,9 +53,7 @@ void logMat(const tmx::mat<R, C, T>& mat)
         {
             logVal(mat[c][r]);
             std::cout << " ";
-            // std::cout << mat[c][r] << " ";
         }
-        // std::cout << mat[C - 1][r];
         logVal(mat[C - 1][r]);
         std::cout << ")" << '\n';
     }
@@ -82,20 +80,44 @@ void logQuat(const tmx::quat<T>& qua)
 
 int main()
 {
-    // std::cout << std::setprecision(5);
+    // std::cout << std::setprecision(10);
 
     using namespace tmx;
     using namespace Math;
 
 
+    Mat3x3 a3(
+        12.9f, 8.2f, -0.2f, 
+        -7.8f, 2.0f, 4.9f, 
+        9.0f, -6.8f, 1.9f
+    );
 
-    const float val = 3859.278935f;
-    std::cout << InvSqrt(val) << " " << FastInvSqrt(val);
-    
-    
+    Mat4x4 a(
+        12.9f, 8.2f, -0.2f, 10.7f, 
+        -7.8f, 2.0f, 4.9f, 17.8f,
+        9.0f, -6.8f, 1.9f, 0.0f,
+        0.0f, -2.0f, -8.1f, 1.0f
+    );
+    Mat4x4 b(
+        0.3f, 1.0f, -2.9f, 0.0f,
+        0.0f, 0.0f, 6.2f, -2.0f, 
+        -1.9f, -1.1f, 2.2f, 8.5f,
+        7.9f, 0.2f, -6.8f, 1.0f
+    );
 
+    // Mat4x4 mul0 = internal::matMul<4, 4, float, false>::call(a, b);
+    // Mat4x4 mul1 = a * b;
 
-    
+    // logMat(mul0);
+    // std::cout << '\n';
+    // logMat(mul1);
+    // std::cout << '\n' << (mul0 == mul1);
+
+    logMat(internal::matInverse<4, 4, float, false>::call(a));
+    std::cout << '\n';
+    logMat(Mat::Transpose(Mat::Inverse(a)));
+    std::cout << '\n' << (internal::matInverse<4, 4, float, false>::call(a) == Mat::Transpose(Mat::Inverse(a)));
+
 
 
 

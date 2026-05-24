@@ -215,62 +215,6 @@ namespace tmx
         {
             TMX_INLINE static constexpr mat<4, 4, T> call(const mat<4, 4, T>& m) noexcept
             {
-                // const T coef00 = m[2][2] * m[3][3] - m[3][2] * m[2][3];
-			    // const T coef02 = m[1][2] * m[3][3] - m[3][2] * m[1][3];
-			    // const T coef03 = m[1][2] * m[2][3] - m[2][2] * m[1][3];
-			    // const T coef04 = m[2][1] * m[3][3] - m[3][1] * m[2][3];
-			    // const T coef06 = m[1][1] * m[3][3] - m[3][1] * m[1][3];
-			    // const T coef07 = m[1][1] * m[2][3] - m[2][1] * m[1][3];
-			    // const T coef08 = m[2][1] * m[3][2] - m[3][1] * m[2][2];
-			    // const T coef10 = m[1][1] * m[3][2] - m[3][1] * m[1][2];
-			    // const T coef11 = m[1][1] * m[2][2] - m[2][1] * m[1][2];
-			    // const T coef12 = m[2][0] * m[3][3] - m[3][0] * m[2][3];
-			    // const T coef14 = m[1][0] * m[3][3] - m[3][0] * m[1][3];
-			    // const T coef15 = m[1][0] * m[2][3] - m[2][0] * m[1][3];
-			    // const T coef16 = m[2][0] * m[3][2] - m[3][0] * m[2][2];
-			    // const T coef18 = m[1][0] * m[3][2] - m[3][0] * m[1][2];
-			    // const T coef19 = m[1][0] * m[2][2] - m[2][0] * m[1][2];
-			    // const T coef20 = m[2][0] * m[3][1] - m[3][0] * m[2][1];
-			    // const T coef22 = m[1][0] * m[3][1] - m[3][0] * m[1][1];
-			    // const T coef23 = m[1][0] * m[2][1] - m[2][0] * m[1][1];
-
-			    // const vec<4, T> fac0(coef03, coef02, coef00, coef00);
-			    // const vec<4, T> fac1(coef07, coef06, coef04, coef04);
-			    // const vec<4, T> fac2(coef11, coef10, coef08, coef08);
-			    // const vec<4, T> fac3(coef15, coef14, coef12, coef12);
-			    // const vec<4, T> fac4(coef19, coef18, coef16, coef16);
-			    // const vec<4, T> fac5(coef23, coef22, coef20, coef20);
-
-			    // const vec<4, T> vec0(m[0][0], m[0][0], m[0][0], m[1][0]);
-			    // const vec<4, T> vec1(m[0][1], m[0][1], m[0][1], m[1][1]);
-			    // const vec<4, T> vec2(m[0][2], m[0][2], m[0][2], m[1][2]);
-			    // const vec<4, T> vec3(m[0][3], m[0][3], m[0][3], m[1][3]);
-
-			    // const vec<4, T> inv0 = vec1 * fac0 - vec2 * fac1 + vec3 * fac2;
-			    // const vec<4, T> inv1 = vec0 * fac0 - vec2 * fac3 + vec3 * fac4;
-			    // const vec<4, T> inv2 = vec0 * fac1 - vec1 * fac3 + vec3 * fac5;
-			    // const vec<4, T> inv3 = vec0 * fac2 - vec1 * fac4 + vec2 * fac5;
-
-			    // const vec<4, T> signA(-1, 1, -1, 1);
-			    // const vec<4, T> signB(1, -1, 1, -1);
-
-			    // const mat<4, 4, T> res(inv0 * signA, inv1 * signB, inv2 * signA, inv3 * signB);
-
-
-
-			    // const T detCof0 =  (m[1][1] * coef00 - m[1][2] * coef04 + m[1][3] * coef08);
-			    // const T detCof1 = -(m[1][0] * coef00 - m[1][2] * coef12 + m[1][3] * coef16);
-			    // const T detCof2 =  (m[1][0] * coef04 - m[1][1] * coef12 + m[1][3] * coef20);
-			    // const T detCof3 = -(m[1][0] * coef08 - m[1][1] * coef16 + m[1][2] * coef20);
-
-			    // const T invDet = static_cast<T>(1) / (
-				// 	m[0][0] * detCof0 + m[0][1] * detCof1 +
-			    // 	m[0][2] * detCof2 + m[0][3] * detCof3
-				// );
-
-			    // return res * invDet;
-
-
                 const T sub00 = m[2][2] * m[3][3] - m[3][2] * m[2][3];
 		        const T sub01 = m[2][1] * m[3][3] - m[3][1] * m[2][3];
 		        const T sub02 = m[2][1] * m[3][2] - m[3][1] * m[2][2];
@@ -291,6 +235,7 @@ namespace tmx
 		        const T sub17 = m[1][0] * m[2][1] - m[2][0] * m[1][1];
 
 		        mat<4, 4, T> res;
+
 		        res[0][0] = + (m[1][1] * sub00 - m[1][2] * sub01 + m[1][3] * sub02);
 		        res[1][0] = - (m[1][0] * sub00 - m[1][2] * sub03 + m[1][3] * sub04);
 		        res[2][0] = + (m[1][0] * sub01 - m[1][1] * sub03 + m[1][3] * sub05);
@@ -355,3 +300,9 @@ namespace tmx
     } // namespace Mat
     
 } // namespace tmx
+
+
+#if !defined(TMX_SIMD_NONE)
+#	include "tmx/internal/simd/mat_inverse.inl"
+
+#endif

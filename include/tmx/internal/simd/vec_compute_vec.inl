@@ -3,7 +3,7 @@ namespace tmx
     namespace internal
     {
     
-        // #include <immintrin.h>
+        #include <immintrin.h>
 
 #       if defined(TMX_SIMD_SSE)
 
@@ -51,6 +51,19 @@ namespace tmx
                 vec<4, float> res;
 
                 res.reg = _mm_div_ps(a.reg, b.reg);
+                return res;
+            }
+        };
+
+
+        template<>
+        struct vecNeg<4, float, true> 
+        {
+            TMX_INLINE static vec<4, float> call(const vec<4, float>& v)
+            {
+                vec<4, float> res;
+
+                res.reg = _mm_mul_ps(_mm_set1_ps(-1.0f), v.reg);
                 return res;
             }
         };
@@ -104,6 +117,18 @@ namespace tmx
                 vec<4, double> res;
 
                 res.reg = _mm256_div_pd(a.reg, b.reg);
+                return res;
+            }
+        };
+
+        template<>
+        struct vecNeg<4, double, true> 
+        {
+            TMX_INLINE static vec<4, double> call(const vec<4, double>& v)
+            {
+                vec<4, double> res;
+
+                res.reg = _mm256_mul_pd(_mm256_set1_pd(-1.0), v.reg);
                 return res;
             }
         };
@@ -164,6 +189,29 @@ namespace tmx
                 return res;
             }
         };
+        template<>
+        struct vecOr<4, int32_t, true> 
+        {
+            TMX_INLINE static vec<4, int32_t> call(const vec<4, int32_t>& a, const vec<4, int32_t>& b)
+            {
+                vec<4, int32_t> res;
+
+                res.reg = _mm_or_si128(a.reg, b.reg);
+                return res;
+            }
+        };
+        template<>
+        struct vecXor<4, int32_t, true> 
+        {
+            TMX_INLINE static vec<4, int32_t> call(const vec<4, int32_t>& a, const vec<4, int32_t>& b)
+            {
+                vec<4, int32_t> res;
+
+                res.reg = _mm_xor_si128(a.reg, b.reg);
+                return res;
+            }
+        };
+        
 
 
 #       endif
