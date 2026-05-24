@@ -23,8 +23,6 @@ namespace tmx
                 res[1] = Vec::Cross(c, a);
                 res[2] = Vec::Cross(a, b);
 
-                // res = Mat::Transpose(res);
-
                 const float invDet = 1.0f / (
                     Vec::Dot(a, Vec::Cross(b, c))
                 );
@@ -39,9 +37,6 @@ namespace tmx
             TMX_INLINE static mat<4, 4, float> call(const mat<4, 4, float>& m) noexcept
             {
                 // source : https://github.com/icaven/glm/blob/master/glm/simd/matrix.h
-
-
-                // Well, the resulting matrix is transposed...
 
                 mat<4, 4, float> res;
 
@@ -266,6 +261,8 @@ namespace tmx
 	            res[1].reg = _mm_mul_ps(inv1, invDet);
 	            res[2].reg = _mm_mul_ps(inv2, invDet);
 	            res[3].reg = _mm_mul_ps(inv3, invDet);
+
+				_MM_TRANSPOSE4_PS(res[0].reg, res[1].reg, res[2].reg, res[3].reg);
 
 				return res;
             }

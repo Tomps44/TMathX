@@ -86,41 +86,37 @@ int main()
     using namespace Math;
 
 
-    Mat3x3 a3(
-        12.9f, 8.2f, -0.2f, 
-        -7.8f, 2.0f, 4.9f, 
-        9.0f, -6.8f, 1.9f
-    );
+    
 
-    Mat4x4 a(
-        12.9f, 8.2f, -0.2f, 10.7f, 
-        -7.8f, 2.0f, 4.9f, 17.8f,
-        9.0f, -6.8f, 1.9f, 0.0f,
-        0.0f, -2.0f, -8.1f, 1.0f
-    );
-    Mat4x4 b(
-        0.3f, 1.0f, -2.9f, 0.0f,
-        0.0f, 0.0f, 6.2f, -2.0f, 
-        -1.9f, -1.1f, 2.2f, 8.5f,
-        7.9f, 0.2f, -6.8f, 1.0f
-    );
+    // Need to paste this at the start of every single file...
+    // And also need to change the name (TomPS44) to something a little more professional
+    // git remote set-url origin https://github.com/.../TMathX.git
 
-    // Mat4x4 mul0 = internal::matMul<4, 4, float, false>::call(a, b);
-    // Mat4x4 mul1 = a * b;
-
-    // logMat(mul0);
-    // std::cout << '\n';
-    // logMat(mul1);
-    // std::cout << '\n' << (mul0 == mul1);
-
-    logMat(internal::matInverse<4, 4, float, false>::call(a));
-    std::cout << '\n';
-    logMat(Mat::Transpose(Mat::Inverse(a)));
-    std::cout << '\n' << (internal::matInverse<4, 4, float, false>::call(a) == Mat::Transpose(Mat::Inverse(a)));
-
-
-
-
+/***********************************************************************************/
+/*                   This file is part of the TMathX library                       */
+/***********************************************************************************/
+/*                                                                                 */
+/*  Copyright (c) 2026 TomPS44                                                     */
+/*                                                                                 */
+/*  Permission is hereby granted, free of charge, to any person obtaining a copy   */
+/*  of this software and associated documentation files (the "Software"), to deal  */
+/*  in the Software without restriction, including without limitation the rights   */
+/*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell      */
+/*  copies of the Software, and to permit persons to whom the Software is          */
+/*  furnished to do so, subject to the following conditions:                       */
+/*                                                                                 */
+/*  The above copyright notice and this permission notice shall be                 */
+/*  included in all copies or substantial portions of the Software.                */
+/*                                                                                 */
+/*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     */
+/*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       */
+/*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    */
+/*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         */
+/*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  */
+/*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  */
+/*  SOFTWARE.                                                                      */
+/*                                                                                 */
+/***********************************************************************************/
     
 
   
