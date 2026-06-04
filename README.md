@@ -1,15 +1,27 @@
-## TMathX 
+## Gammalgebra
 
-TMX is a C++ math library made for graphics rendering.
+GLB is a C++ header-only math library made for graphics rendering. <br> It supports `Vectors`, with 2, 3 and 4 components,
+`Matrices`, of size 2x2, 3x3 and 4x4, and `Quaternions`. <br>
+SIMD instructions are also implemented, for devices supporting SSE, SSE2, or AVX.
+
 
 ```cpp
-#include "tmx/types/vec3_float.hpp"
+#include "glb/vec/vec_type.hpp"
+#include "glb/vec/functions.hpp"
+
+using namespace glb;
 
 int main()
 {
-    tmx::vec3f(1.1f, 2.2f, 3.3f);
+    Vec3 a(1.1f, 2.2f, 3.3f);
+    Vec3 b(-1.1f, -2.2f, -3.3f);
+
+    Vec3 c = Vec::Cross(a, b);
 
     return 0;
 }
 ```
+
+
+Need to update the readme, and the documentation.
 

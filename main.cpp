@@ -3,28 +3,28 @@
 #include <chrono>
 
 
-// #define TMX_FORCE_SIMD_NONE
-// #define TMX_FORCE_SSE2
-// #define TMX_FORCE_AVX
-#define TMX_SET_COORDINATE_SYSTEM_RH
-#define TMX_SET_ROTATION_ORDER_ZXY
-#define TMX_SET_ROTATION_TYPE_EXTRINSIC
-#define TMX_SET_Z_RANGE_N1_1
-#define TMX_SET_Y_AXIS_UPWARDS
+// #define GLB_FORCE_SIMD_NONE
+// #define GLB_FORCE_SSE2
+// #define GLB_FORCE_AVX
+#define GLB_SET_COORDINATE_SYSTEM_RH
+#define GLB_SET_ROTATION_ORDER_ZXY
+#define GLB_SET_ROTATION_TYPE_EXTRINSIC
+#define GLB_SET_Z_RANGE_N1_1
+#define GLB_SET_Y_AXIS_UPWARDS
 
 
-#include "tmx/vec/vec_type.hpp"
-#include "tmx/vec/functions.hpp"
+#include "glb/vec/vec_type.hpp"
+#include "glb/vec/functions.hpp"
 
-#include "tmx/mat/mat_type.hpp"
-#include "tmx/mat/functions.hpp"
+#include "glb/mat/mat_type.hpp"
+#include "glb/mat/functions.hpp"
 
-#include "tmx/quat/quat_type.hpp"
-#include "tmx/quat/functions.hpp"
+#include "glb/quat/quat_type.hpp"
+#include "glb/quat/functions.hpp"
 
-#include "tmx/math/functions.hpp"
+#include "glb/math/functions.hpp"
 
-#include "tmx/internal/hash.hpp"
+#include "glb/internal/hash.hpp"
 
 
 template<typename T>
@@ -34,7 +34,7 @@ void logVal(T val)
 }
 
 template<int S, typename T>
-void logVec(const tmx::vec<S, T>& vec)
+void logVec(const glb::vec<S, T>& vec)
 {
     std::cout << "(";
     for (int i = 0; i < S - 1; i++)
@@ -46,7 +46,7 @@ void logVec(const tmx::vec<S, T>& vec)
 }
 
 template<int R, int C, typename T>
-void logMat(const tmx::mat<R, C, T>& mat)
+void logMat(const glb::mat<R, C, T>& mat)
 {
     for (int r = 0; r < R; r++)
     {
@@ -62,7 +62,7 @@ void logMat(const tmx::mat<R, C, T>& mat)
 }
 
 template<typename T>
-void logQuat(const tmx::quat<T>& qua)
+void logQuat(const glb::quat<T>& qua)
 {
     std::cout << "(";
     for (int i = 0; i < 3; i++)
@@ -77,61 +77,11 @@ void logQuat(const tmx::quat<T>& qua)
 
 
 
-
+using namespace glb;
 
 
 int main()
 {
-    // std::cout << std::setprecision(10);
-
-    using namespace tmx;
-    using namespace Math;
-
-
-
-/***********************************************************************************/
-/*                   This file is part of the TMathX library                       */
-/***********************************************************************************/
-/*                                                                                 */
-/*  Copyright (c) 2026 Tomps44                                                     */
-/*                                                                                 */
-/*  Permission is hereby granted, free of charge, to any person obtaining a copy   */
-/*  of this software and associated documentation files (the "Software"), to deal  */
-/*  in the Software without restriction, including without limitation the rights   */
-/*  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell      */
-/*  copies of the Software, and to permit persons to whom the Software is          */
-/*  furnished to do so, subject to the following conditions:                       */
-/*                                                                                 */
-/*  The above copyright notice and this permission notice shall be                 */
-/*  included in all copies or substantial portions of the Software.                */
-/*                                                                                 */
-/*  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     */
-/*  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       */
-/*  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    */
-/*  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         */
-/*  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  */
-/*  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  */
-/*  SOFTWARE.                                                                      */
-/*                                                                                 */
-/***********************************************************************************/
-    
-
-    /** Need to add in the Math namespace :
-     * Floor/Ceil/Truc...ToInt
-     * WrapAngle (keeps it between 0 and 2PI)
-     * LerpAngle (lerp with shortest path)
-     * IsPOwerOfTwo and NextPowerOfTwo
-     * IsNaN and IsInf
-     * Equal(with epsilon) and IsZero
-     * BitCast ??
-     * Clz (Count Leading Zeros) and Popcount (amount of bits set to 1)
-     */
-
-    // And also think of a new name, which would sound good in its abbreviated form (in the namespace), and goes well with other libraries
-
-
-
-
     return 0;
 }
 
