@@ -1,5 +1,3 @@
-#include <immintrin.h>
-
 namespace glb
 {
     namespace glbInternal

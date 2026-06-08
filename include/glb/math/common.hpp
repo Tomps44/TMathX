@@ -57,9 +57,9 @@ namespace glb
 
 
         template<typename T>
-        GLB_INLINE constexpr bool IsEqual(T a, T b) noexcept;
+        GLB_INLINE constexpr bool ApproxEqual(T a, T b) noexcept;
         template<typename T>
-        GLB_INLINE constexpr bool IsZero(T val) noexcept;
+        GLB_INLINE constexpr bool ApproxZero(T val) noexcept;
 
 
         template<typename T>

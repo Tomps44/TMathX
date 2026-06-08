@@ -98,43 +98,28 @@ namespace glb
 
 
         template<typename T>
-        GLB_INLINE constexpr bool IsEqual(T a, T b) noexcept
+        GLB_INLINE constexpr bool ApproxEqual(T a, T b) noexcept
         {
-            return a == b;
-        }
-        template<>
-        GLB_INLINE constexpr bool IsEqual(float a, float b) noexcept
-        {
-            return std::abs(a - b) < 8.0e-05f;
-        }
-        template<>
-        GLB_INLINE constexpr bool IsEqual(double a, double b) noexcept
-        {
-            return std::abs(a - b) < 8.0e-13f;
-        }
-        template<>
-        GLB_INLINE constexpr bool IsEqual(long double a, long double b) noexcept
-        {
-            return std::abs(a - b) < 8.0e-16f;
+            return glbInternal::computeEqual<T, std::numeric_limits<T>::is_iec559>::call(a, b);
         }
 
         template<typename T>
-        GLB_INLINE constexpr bool IsZero(T val) noexcept
+        GLB_INLINE constexpr bool ApproxZero(T val) noexcept
         {
-            return val == static_cast<T>(0);
+            return val == 0;
         }
         template<>
-        GLB_INLINE constexpr bool IsZero(float val) noexcept
+        GLB_INLINE constexpr bool ApproxZero(float val) noexcept
         {
             return std::abs(val) < 8.0e-05f;
         }
         template<>
-        GLB_INLINE constexpr bool IsZero(double val) noexcept
+        GLB_INLINE constexpr bool ApproxZero(double val) noexcept
         {
             return std::abs(val) < 8.0e-13f;
         }
         template<>
-        GLB_INLINE constexpr bool IsZero(long double val) noexcept
+        GLB_INLINE constexpr bool ApproxZero(long double val) noexcept
         {
             return std::abs(val) < 8.0e-16f;
         }

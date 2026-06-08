@@ -214,5 +214,9 @@
 #define GLB_VERSION_MAJOR 1
 #define GLB_VERSION_MINOR 0
 
+// The lest digit represents the minor version, and the first digit the major version
+#define GLB_VERSION 10
+
+
 
 
