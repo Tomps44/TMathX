@@ -139,7 +139,7 @@
 #if !defined(GLB_SET_ROTATION_ORDER_XYZ) && !defined(GLB_SET_ROTATION_ORDER_XZY) && !defined(GLB_SET_ROTATION_ORDER_YXZ) && \
     !defined(GLB_SET_ROTATION_ORDER_YZX) && !defined(GLB_SET_ROTATION_ORDER_ZXY) && !defined(GLB_SET_ROTATION_ORDER_ZYX) 
 
-#   error Rotation order (XYZ, XZY, YXZ, YZX, ZXY or ZYX) not specified ! Use GLB_SET_ROTATION_SYSTEM_... with ... being either XYZ, XZY, YXZ, YZX, ZXY or ZYX.
+#   error Rotation order (XYZ, XZY, YXZ, YZX, ZXY or ZYX) not specified ! Use GLB_SET_ROTATION_ORDER_... XYZ, XZY, YXZ, YZX, ZXY or ZYX.
 #endif
 
 
